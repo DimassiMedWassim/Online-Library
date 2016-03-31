@@ -14,7 +14,36 @@ and open the template in the editor.
         <title>admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    <h:body>
+        <ui:composition>
+    <p:tab id="adminTab" title="Admin" rendered="#{sec:areAnyGranted('ROLE_ADMIN')}">
+        <p:tabView orientation="left" dynamic="true" cache="false">
+            <p:tab title="JMX">
+                <h:outputText value="Lorem 8"/>
+            </p:tab>
+
+            <p:tab title="Logging">
+                <ui:include src="admin/logback.xhtml"/>
+            </p:tab>
+
+            <p:tab title="Sessions">
+                <ui:include src="admin/sessions.xhtml"/>
+            </p:tab>
+
+            <p:tab title="JVM">
+                <ui:include src="admin/runtime.xhtml"/>
+            </p:tab>
+
+            <p:tab title="Host Environment">
+                <ui:include src="admin/environment.xhtml"/>
+            </p:tab>
+
+            <p:tab title="System Properties">
+                <ui:include src="admin/properties.xhtml"/>
+            </p:tab>
+
+        </p:tabView>
+    </p:tab>
+</ui:composition>
+    </h:body>
 </html>

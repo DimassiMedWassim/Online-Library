@@ -7,6 +7,7 @@ package com.lib.ManagedBeans;
 
 import com.lib.util.LoginVal;
 import com.lib.util.SessionBean;
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @RequestScoped
-public class LoginAdmin {
+public class LoginAdmin implements Serializable{
 
     /**
      * Creates a new instance of LoginAdmin
@@ -46,7 +47,7 @@ public class LoginAdmin {
         this.password = password;
     }
     public String validateUsernamePassword() {
-        boolean valid = LoginVal.validate(username, password);
+        boolean valid = LoginVal.validate(username, password,"Administrateur");
         if (valid) {
             HttpSession session = SessionBean.getSession();
             session.setAttribute("username", username);

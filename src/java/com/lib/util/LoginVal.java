@@ -20,15 +20,16 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class LoginVal {
 
-   public static boolean validate(String user, String password) {
+   public static boolean validate(String user, String password , String table) {
         Connection con = null;
         PreparedStatement ps = null;
  
         try {
             con = DataConnect.getConnection();
-            ps = con.prepareStatement("Select uname, password from Users where uname = ? and password = ?");
-            ps.setString(1, user);
-            ps.setString(2, password);
+            ps = con.prepareStatement("Select uname, password from ? where login = ? and pass = ?");
+            ps.setString(1, table);
+            ps.setString(2, user);
+            ps.setString(3, password);
  
             ResultSet rs = ps.executeQuery();
  

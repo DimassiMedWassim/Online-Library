@@ -22,8 +22,7 @@ and open the template in the editor.
             <p:password id="password" value="#{LoginAdmin.password}" required="true" label="password" />
  
             <f:facet name="footer">
-                <p:commandButton value="Login" update="growl" actionListener="#{LoginAdmin.login}"
-                                 oncomplete="handleLoginRequest(xhr, status, args)" />
+                <p:commandButton value="Login"  action="#{LoginAdmin.login}" />
             </f:facet>  
 
     </body>
