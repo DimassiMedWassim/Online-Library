@@ -30,7 +30,7 @@ public class LoginVal {
             ps.setString(1, table);
             ps.setString(2, user);
             ps.setString(3, password);
- 
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery();
  
             if (rs.next()) {

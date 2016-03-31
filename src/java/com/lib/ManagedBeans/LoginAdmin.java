@@ -46,10 +46,12 @@ public class LoginAdmin implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-    public String validateUsernamePassword() {
+    public String login() {
         boolean valid = LoginVal.validate(username, password,"Administrateur");
         if (valid) {
             HttpSession session = SessionBean.getSession();
+            System.out.println(username);
+            System.out.println(password);
             session.setAttribute("username", username);
             return "admin";
         } else {

@@ -10,20 +10,19 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
         <h:outputLabel for="username" value="Username:" />
             <p:inputText id="username" value="#{LoginAdmin.username}" required="true" label="username" />
  
             <h:outputLabel for="password" value="Password:" />
             <p:password id="password" value="#{LoginAdmin.password}" required="true" label="password" />
  
-            <f:facet name="footer">
-                <p:commandButton value="Login"  action="#{LoginAdmin.login}" />
-            </f:facet>  
+                <p:commandButton value="Login"  action="#{LoginAdmin.login()}" />
+            
 
-    </body>
+    </h:body>
 </html>
