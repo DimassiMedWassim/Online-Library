@@ -26,10 +26,9 @@ public class LoginVal {
  
         try {
             con = DataConnect.getConnection();
-            ps = con.prepareStatement("Select uname, password from ? where login = ? and pass = ?");
-            ps.setString(1, table);
-            ps.setString(2, user);
-            ps.setString(3, password);
+            ps = con.prepareStatement("Select login, pass from "+table+" where login = ? and pass = ?");
+            ps.setString(1, user);
+            ps.setString(2, password);
             System.out.println(ps);
             ResultSet rs = ps.executeQuery();
  

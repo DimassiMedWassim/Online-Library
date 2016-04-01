@@ -15,14 +15,21 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:outputLabel for="username" value="Username:" />
-            <p:inputText id="username" value="#{LoginAdmin.username}" required="true" label="username" />
- 
-            <h:outputLabel for="password" value="Password:" />
-            <p:password id="password" value="#{LoginAdmin.password}" required="true" label="password" />
- 
-                <p:commandButton value="Login"  action="#{LoginAdmin.login()}" />
-            
+     <h:form>
+        <h3>Login</h3>
+        <h:outputText value="Username" />
+        <h:inputText id="username" value="#{loginAdmin.username}"></h:inputText>
+        <h:message for="username"></h:message>
+        <br /><br />
+         
+        <h:outputText value="Password" />
+        <h:inputSecret id="password" value="#{loginAdmin.password}"></h:inputSecret>
+        <h:message for="password"></h:message>
+        <br /><br />
+         
+        <h:commandButton action="#{loginAdmin.login}" value="Login"></h:commandButton>
+    </h:form>
+       
 
     </h:body>
 </html>
