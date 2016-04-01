@@ -14,19 +14,19 @@ and open the template in the editor.
     </h:head>
     <h:body>
      <h:form>
-        <h3>Login</h3>
+         <p:growl id="growl" life="2000" />
+         <h2>Login</h2>
+         <h:panelGrid columns="2" cellpadding="5">
+             
         <h:outputText value="Username" />
-        <h:inputText id="username" value="#{loginAdmin.username}"></h:inputText>
-        <h:message for="username"></h:message>
-        <br /><br />
+        <p:inputText id="username" value="#{loginAdmin.username}"></p:inputText>
          
         <h:outputText value="Password" />
-        <h:inputSecret id="password" value="#{loginAdmin.password}"></h:inputSecret>
+        <p:password id="password" value="#{loginAdmin.password}"></p:password>
         <h:message for="password"></h:message>
-        <br /><br />
-         
-        <h:commandButton action="#{loginAdmin.login}" value="Login"></h:commandButton>
-    </h:form>
+        <p:commandButton value="login" id="submit" update="growl" action="#{loginAdmin.login}" styleClass="ui-priority-primary" />
+    </h:panelGrid>
+     </h:form>
        
 
     </h:body>

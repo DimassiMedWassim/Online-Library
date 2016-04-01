@@ -139,11 +139,15 @@ public class Authentification implements Filter {
     HttpServletResponse response = (HttpServletResponse) res;
     HttpSession session = request.getSession(false);
     String user = (session != null) ? (String) session.getAttribute("username") : null;
-    String loginURL = request.getContextPath() + "/faces/admin/login.xhtml"; 
-
+    String loginURL = request.getContextPath() + "/faces/admin/login.xhtml";
+    String adminURL = request.getContextPath() + "/faces/admin/admin.xhtml";
+    if(user != null && request.getRequestURI().equals(loginURL)){
+        response.sendRedirect(adminURL);
+    }
+    else
     if (user == null && !request.getRequestURI().equals(loginURL)) {       
         response.sendRedirect(loginURL);
-    } else {
+    } else{
         chain.doFilter(request, response);
     }
     }
