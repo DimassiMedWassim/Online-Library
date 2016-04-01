@@ -9,15 +9,12 @@ import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author hidro
  */
-@ManagedBean
-@RequestScoped
+
 public class LoginVal {
 
    public static boolean validate(String user, String password , String table) {
@@ -30,6 +27,7 @@ public class LoginVal {
             ps.setString(1, user);
             ps.setString(2, password);
             System.out.println(ps);
+            System.err.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
             ResultSet rs = ps.executeQuery();
  
             if (rs.next()) {
