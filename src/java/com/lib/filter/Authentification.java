@@ -5,6 +5,7 @@
  */
 package com.lib.filter;
 
+import com.lib.util.SessionBean;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -141,6 +142,11 @@ public class Authentification implements Filter {
     String user = (session != null) ? (String) session.getAttribute("username") : null;
     String loginURL = request.getContextPath() + "/faces/admin/login.xhtml";
     String adminURL = request.getContextPath() + "/faces/admin/admin.xhtml";
+    String dcURL = request.getContextPath() + "/faces/admin/dc.xhtml";
+    if(request.getRequestURI().equals(dcURL)){
+        session.invalidate();
+        response.sendRedirect(loginURL);
+            }
     if(user != null && request.getRequestURI().equals(loginURL)){
         response.sendRedirect(adminURL);
     }

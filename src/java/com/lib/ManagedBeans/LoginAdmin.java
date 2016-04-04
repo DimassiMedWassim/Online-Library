@@ -66,6 +66,7 @@ public class LoginAdmin implements Serializable{
  
     //logout event, invalidate session
     public String logout() {
+       System.out.println("logout");
         HttpSession session = SessionBean.getSession();
         session.invalidate();
         return "login";
