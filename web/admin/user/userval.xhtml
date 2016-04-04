@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>admin</title>
+        <title>validate user</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
@@ -24,33 +24,33 @@ and open the template in the editor.
     <p:menubar>
         <p:submenu label="Utilisateurs" icon="ui-icon-person">
             
-            <p:menuitem value="validation" url="user/userval.xhtml" icon="ui-icon-check"/>
+            <p:menuitem value="validation" url="../user/userval.xhtml" icon="ui-icon-check"/>
 
         </p:submenu>
   
          <p:submenu label="Reservation" icon="ui-icon-disk">
-            <p:menuitem value="retour" url="reserv/retour.xhtml" />
-            <p:menuitem value="perdu" url="reserv/perdu.xhtml" />
+            <p:menuitem value="retour" url="../reserv/retour.xhtml" />
+            <p:menuitem value="perdu" url="../reserv/perdu.xhtml" />
             
         </p:submenu>
         
         <p:submenu label="Documents" icon="ui-icon-document">
-            <p:menuitem value="ajoute" url="document/ajout.xhtml" icon="ui-icon-plus" />
-            <p:menuitem value="supprime" url="document/supp.xhtml" icon="ui-icon-minus" />
-            <p:menuitem value="modifie" url="document/modif.xhtml" icon="ui-icon-pencil" />
+            <p:menuitem value="ajoute" url="../document/ajout.xhtml" icon="ui-icon-plus" />
+            <p:menuitem value="supprime" url="../document/supp.xhtml" icon="ui-icon-minus" />
+            <p:menuitem value="modifie" url="../document/modif.xhtml" icon="ui-icon-pencil" />
         </p:submenu>
  
        
  
         <p:submenu label="Categories" icon="ui-icon--script">
-        <p:menuitem value="ajoute" url="categorie/ajout.xhtml" icon="ui-icon-plus" />
-            <p:menuitem value="supprime" url="categorie/supp.xhtml" icon="ui-icon-minus" />
-            <p:menuitem value="modifie" url="categorie/modif.xhtml" icon="ui-icon-pencil" />
+        <p:menuitem value="ajoute" url="../categorie/ajout.xhtml" icon="ui-icon-plus" />
+            <p:menuitem value="supprime" url="../categorie/supp.xhtml" icon="ui-icon-minus" />
+            <p:menuitem value="modifie" url="../categorie/modif.xhtml" icon="ui-icon-pencil" />
         </p:submenu>
         <p:submenu label="Auteurs" icon="ui-icon-pencil">
-        <p:menuitem value="ajoute" url="auteur/ajout.xhtml" icon="ui-icon-plus" />
-            <p:menuitem value="supprime" url="auteur/supp.xhtml" icon="ui-icon-minus" />
-            <p:menuitem value="modifie" url="auteur/modif.xhtml" icon="ui-icon-pencil" />
+        <p:menuitem value="ajoute" url="../auteur/ajout.xhtml" icon="ui-icon-plus" />
+            <p:menuitem value="supprime" url="../auteur/supp.xhtml" icon="ui-icon-minus" />
+            <p:menuitem value="modifie" url="../auteur/modif.xhtml" icon="ui-icon-pencil" />
         </p:submenu>
  
         <f:facet name="options">
