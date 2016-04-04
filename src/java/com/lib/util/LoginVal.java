@@ -27,7 +27,6 @@ public class LoginVal {
             ps.setString(1, user);
             ps.setString(2, password);
             System.out.println(ps);
-            System.err.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
             ResultSet rs = ps.executeQuery();
  
             if (rs.next()) {

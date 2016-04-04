@@ -15,6 +15,21 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <p>#{loginUser.username}</p>
+        <div></div>
+        <h:form>
+            
+            <p:growl id="messages" showDetail="true"/>
+            <p:menu>
+                <p:menuitem value="Gmail" url="http://www.google.com" />
+                <p:menuitem value="Hotmail" url="http://www.hotmail.com" />
+                <p:menuitem value="Yahoo Mail" url="http://mail.yahoo.com" />
+                <p:menuitem value="Yahoo Mail" url="http://mail.yahoo.com" />
+                <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
+
+</p:menu>
+
+
+
+        </h:form>
     </h:body>
 </html>
