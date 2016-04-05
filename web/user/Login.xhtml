@@ -16,18 +16,26 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            <h3>Login</h3>
-            <h:outputText value="Username" />
+            <p:panel header="Authentification">
+            
+            <p:messages autoUpdate="true"/>
+            <h:panelGrid id="grid" columns="4" cellpadding="5">
+            
+            <h:outputLabel for="username" value="Login" />
             <h:inputText id="username" value="#{loginUser.username}"></h:inputText>
             <h:message for="username"></h:message>
             <br /><br />
 
-            <h:outputText value="Password" />
-            <h:inputSecret id="password" value="#{loginUser.password}"></h:inputSecret>
+            <h:outputLabel for="password" value="Password" />
+            <p:password id="password" value="#{loginUser.password}"/>
             <h:message for="password"></h:message>
-            <br /><br />
+            
+            </h:panelGrid>
+            
 
             <h:commandButton action="#{loginUser.login()}" value="Login"></h:commandButton>
-        </h:form>
+        </p:panel>
+            </h:form>
+        
     </h:body>
 </html>

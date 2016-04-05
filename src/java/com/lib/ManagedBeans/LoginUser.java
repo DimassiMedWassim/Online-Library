@@ -20,8 +20,10 @@ import javax.servlet.http.HttpSession;
 @ManagedBean
 @RequestScoped
 public class LoginUser {
+
     private String username;
     private String password;
+
     /**
      * Creates a new instance of LoginUser
      */
@@ -43,9 +45,9 @@ public class LoginUser {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String login() {
-        boolean valid = LoginVal.validate(username, password,"Utilisateur");
+        boolean valid = LoginVal.validate(username, password, "Utilisateur");
         if (valid) {
             HttpSession session = SessionBean.getSession();
             System.out.println(username);
@@ -55,12 +57,11 @@ public class LoginUser {
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
                             "Incorrect Username and Passowrd",
                             "Please enter correct username and Password"));
             return "login";
         }
     }
-    
-    
+
 }
