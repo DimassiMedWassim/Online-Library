@@ -14,6 +14,7 @@ and open the template in the editor.
         <title>Accueil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./css/style.css"/>
     </h:head>
     <h:body>
         <nav class="navbar navbar-default">
@@ -70,21 +71,31 @@ and open the template in the editor.
             </div><!-- /.container-fluid -->
         </nav>
         <!--img src="../img/onl.jpg" alt="online_library" height="100%" width="100%"/--> 
+
+
+
         <h:form>
             <p:accordionPanel multiple="true" value="#{viewDocs.docs}" var="doc">
-                <p:tab title="Document - #{doc.id}">
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <f:facet name="header">
-                            <p:graphicImage name="../img/home.png" />
-                        </f:facet>                  
-                        <h:outputText value="Auteur:" style="font-weight: bold" />
-                        <h:outputText value="#{doc.auteur}" />
+                <p:tab title="#{doc.titre}">
+                    <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
+                        <p:graphicImage value="../#{doc.img}" width="121" height="175"/> 
+                        
+                        <p:outputPanel style="width:80%;margin-left: 1cm;margin-right: 0cm"> 
+                            <h:outputText value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the family."/>
+                        </p:outputPanel>
+                        <p:outputPanel style="width:80%;margin-left: cm;margin-right: 2cm">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Auteur: " />
+                                <h:outputText value="#{doc.auteur}" style="font-weight: bold"/>
 
-                        <h:outputText value="Date de sortie:" style="font-weight: bold" />
-                        <h:outputText value="#{doc.dateSortie}" />
+                                <h:outputText value="Date: " />
+                                <h:outputText value="#{doc.dateSortie}" style="font-weight: bold"/>
 
-                        <h:outputText value="Langage:" style="font-weight: bold" />
-                        <h:outputText value="#{doc.langage}" />
+                                <h:outputText value="Categorie: " />
+                                <h:outputText value="#{doc.categorie}" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+
                     </h:panelGrid>
                 </p:tab>
             </p:accordionPanel>
