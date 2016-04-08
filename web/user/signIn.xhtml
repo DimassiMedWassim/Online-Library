@@ -65,5 +65,9 @@ and open the template in the editor.
         
     </p:panel>
        </h:form>
+        <p:contentFlow value="#{imagesView.images}" var="image">
+            <p:graphicImage value="../#{image}" styleClass="content" />
+            <div class="caption">#{image}</div>
+        </p:contentFlow>
     </h:body>
 </html>

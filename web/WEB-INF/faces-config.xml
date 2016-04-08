@@ -42,4 +42,14 @@
         <managed-bean-class>com.lib.ManagedBeans.Doc</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>panier</managed-bean-name>
+        <managed-bean-class>com.lib.ManagedBeans.Panier</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>imagesView</managed-bean-name>
+        <managed-bean-class>com.lib.ManagedBeans.ImagesView</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
 </faces-config>

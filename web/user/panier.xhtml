@@ -4,61 +4,21 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Login</title>
+        <title>Panier</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     </h:head>
-    <f:view contentType="text/html">
-        <h:form> 
-            
-            <p:growl id="messages"/>
-
-            <p:menubar>
-                <p:menuitem value="Home" icon="ui-icon-home" url="accueil.xhtml"/>
-
-                <p:menuitem value="Login" icon="ui-icon-person" url="user/Login.xhtml"/>
-                <p:menuitem value="Admin" icon="ui-icon-locked" url="admin/login.xhtml"/>
-
-                
-                
-
-                
-            </p:menubar>           
-        </h:form>
-        <h:body>
-            <h:form>
-                <p:panel header="Authentification">
-
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid id="grid" columns="4" cellpadding="5">
-
-                        <h:outputLabel for="username" value="Login" />
-                        <h:inputText id="username" value="#{loginUser.username}"></h:inputText>
-                        <h:message for="username"></h:message>
-                        <br /><br />
-
-                        <h:outputLabel for="password" value="Password" />
-                        <p:password id="password" value="#{loginUser.password}"/>
-                        <h:message for="password"></h:message>
-
-                    </h:panelGrid>
-
-
-                    <h:commandButton action="#{loginUser.login()}" value="Login"></h:commandButton>
-                </p:panel>
-            </h:form>
-            
-            
-            
-<h:form>
-             <p:accordionPanel multiple="true" value="#{viewDocs.docs}" var="doc">
+    <h:body>
+        
+        <h:form>
+            <p:messages autoUpdate="true"/>
+            <p:accordionPanel multiple="true" value="#{panier.docs}" var="doc">
                 <p:tab title="#{doc.titre}">
                     <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
                         <p:graphicImage value="../#{doc.img}" width="121" height="175"/> 
@@ -80,9 +40,9 @@ and open the template in the editor.
                                 <p:button value="Ajouter" icon="ui-icon-star">
 
                                 </p:button>
-                                <p:commandButton value="Réserver"  actionListener="#{panier.addDoc(doc)}"/>
+                                <h:commandButton value="Supprimer" actionListener="#{panier.addDoc()}"/>
 
-
+                               
 
                             </h:panelGrid>
                         </p:outputPanel>
@@ -91,8 +51,5 @@ and open the template in the editor.
                 </p:tab>
             </p:accordionPanel>
         </h:form>
-
-
-        </h:body>
-    </f:view>
+    </h:body>
 </html>
