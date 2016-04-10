@@ -63,45 +63,32 @@ and open the template in the editor.
         
         
         
-        <h:form id="form">
-    <p:dataTable var="car" value="#{dtLazyView.lazyModel}" paginator="true" rows="10"
+        <h:form id="tform">
+    <p:dataTable var="doc" value="#{dtLazyView.lazyModel}" paginator="true" rows="10"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{dtLazyView.selectedCar}" id="carTable" lazy="true">
-        <p:ajax event="rowSelect" listener="#{dtLazyView.onRowSelect}" update=":form:carDetail" oncomplete="PF('carDialog').show()" />
-        <p:column headerText="Id" sortBy="#{car.id}" filterBy="#{car.id}">
-            <h:outputText value="#{car.id}" />
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{dtLazyView.selectedCar}" id="docTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{dtLazyView.onRowSelect}" update=":form:docDetail" oncomplete="PF('docDialog').show()" />
+        <p:column headerText="Id" sortBy="#{doc.id}" filterBy="#{doc.id}">
+            <h:outputText value="#{doc.id}" />
         </p:column>
-        <p:column headerText="Year" sortBy="#{car.year}" filterBy="#{car.year}">
-            <h:outputText value="#{car.year}" />
+        <p:column headerText="Year" sortBy="#{doc.year}" filterBy="#{doc.year}">
+            <h:outputText value="#{doc.year}" />
         </p:column>
-        <p:column headerText="Brand" sortBy="#{car.brand}" filterBy="#{car.brand}">
-            <h:outputText value="#{car.brand}" />
+        <p:column headerText="Brand" sortBy="#{doc.brand}" filterBy="#{doc.brand}">
+            <h:outputText value="#{doc.brand}" />
         </p:column>
-        <p:column headerText="Color" sortBy="#{car.color}" filterBy="#{car.color}">
-            <h:outputText value="#{car.color}" />
+        <p:column headerText="Color" sortBy="#{doc.color}" filterBy="#{doc.color}">
+            <h:outputText value="#{doc.color}" />
         </p:column>
     </p:dataTable>
  
-    <p:dialog header="Car Detail" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        <p:outputPanel id="carDetail" style="text-align:center;">
-            <p:panelGrid  columns="2" rendered="#{not empty dtLazyView.selectedCar}" columnClasses="label,value">
-                <f:facet name="header">
-                    <p:graphicImage name="demo/images/car/#{dtLazyView.selectedCar.brand}-big.gif"/> 
-                </f:facet>
+    <p:dialog header="Car Detail" widgetVar="docDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="docDetail" style="text-align:center;">
+            <p:panelGrid  columns="2"  columnClasses="label,value">
+                   <p:outputLabel for="mask" value="Mask:" />
+        <p:calendar id="mask" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+        <p:commandButton value="Submit" update="msgs" actionListener="#{calendarView.click}" icon="ui-icon-check" />
  
-                <h:outputText value="Id:" />
-                <h:outputText value="#{dtLazyView.selectedCar.id}" />
- 
-                <h:outputText value="Year" />
-                <h:outputText value="#{dtLazyView.selectedCar.year}" />
- 
-                <h:outputText value="Color:" />
-                <h:outputText value="#{dtLazyView.selectedCar.color}" style="color:#{dtLazyView.selectedCar.color}"/>
- 
-                <h:outputText value="Price:" />
-                <h:outputText value="#{dtLazyView.selectedCar.price}">
-                    <f:convertNumber type="currency" currencySymbol="$" />
-                </h:outputText>
             </p:panelGrid>
         </p:outputPanel>
     </p:dialog>
@@ -110,10 +97,7 @@ and open the template in the editor.
     <h:panelGrid columns="2" cellpadding="5"></h:panelGrid>        
         
         
-        <p:outputLabel for="mask" value="Mask:" />
-        <p:calendar id="mask" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
-        <p:commandButton value="Submit" update="msgs" actionListener="#{calendarView.click}" icon="ui-icon-check" />
- 
+
         </h:form>
  
     </h:body>
