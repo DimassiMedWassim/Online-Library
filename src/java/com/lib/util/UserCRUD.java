@@ -5,10 +5,14 @@
  */
 package com.lib.util;
 
+
 import com.lib.ManagedBeans.SignIn;
 import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,6 +34,32 @@ public class UserCRUD {
             return false;
         }finally {
             DataConnect.close(con);
+        }
+    }
+    public List<Users> getAllUsers() {
+        List<Users> users = new ArrayList<Users>();
+        try {
+            java.sql.Connection con = DataConnect.getConnection();
+            String q = "select * from Livre";
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q);
+            while(rs.next()){
+                Users user = new Users();
+                user.setId(rs.getString(1));
+                user.setNom(rs.getString(2));
+                user.setPrenom(rs.getString(3));
+                user.setMail(rs.getString(4));
+                user.setAddress(rs.getString(5));
+                user.setPass(rs.getString(6));
+                user.setLogin(rs.getString(7));
+                user.setSanction(rs.getString(8));
+                user.setValid(rs.getString(9));
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
         }
     }
 }
