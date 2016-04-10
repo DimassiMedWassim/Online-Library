@@ -6,7 +6,6 @@
 package com.lib.ManagedBeans;
 
 
-import java.util.Date;
 
 /**
  *
@@ -29,7 +28,7 @@ public class Doc {
 
     }
 
-public Doc(String id, String titre, String auteur, String categorie, String img, String dateSortie, String langage) {
+    public Doc(String id, String titre, String auteur, String categorie, String img, String dateSortie, String langage) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -38,6 +37,7 @@ public Doc(String id, String titre, String auteur, String categorie, String img,
         this.dateSortie = dateSortie;
         this.langage = langage;
     }
+    
     public String getId() {
         return id;
     }
