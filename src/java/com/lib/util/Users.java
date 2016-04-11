@@ -5,12 +5,17 @@
  */
 package com.lib.util;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 /**
  *
  * @author hidro
  */
-class Users {
-    private String id;
+@ManagedBean
+@RequestScoped
+public class Users {
+ private String id;
     private String nom;
     private String prenom;
     private String mail;
@@ -91,4 +96,10 @@ class Users {
     public void setValid(String valid) {
         this.valid = valid;
     }
+    /**
+     * Creates a new instance of Users
+     */
+    public Users() {
+    }
+    
 }

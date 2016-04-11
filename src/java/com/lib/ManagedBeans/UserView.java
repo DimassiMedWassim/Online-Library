@@ -4,66 +4,130 @@
  * and open the template in the editor.
  */
 package com.lib.ManagedBeans;
-import com.lib.util.
+
+import com.lib.util.UserCRUD;
+import com.lib.util.Users;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author hidro
  */
-@Named(value = "userView")
-@Dependent
+
+    @ManagedBean(name = "customer")
+@SessionScoped
+
 public class UserView implements Serializable{
 
-    /**
-     * Creates a new instance of UserView
-     */
-    public UserView() {
-    }
-    private List<Users> uses;
+    /*
+  
+    private ArrayList<Users> uses;
      
-    private List<Users> filteredCars;
-    
+    private ArrayList<Users> filteredCars;
+      public UserView() {
+                  UserCRUD d= new UserCRUD();
+        uses = d.getAllUsers();
+    }
     @PostConstruct
     public void init() {
-        uses = service.createCars(10);
-    }
-     
-    public boolean filterByPrice(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if(filterText == null||filterText.equals("")) {
-            return true;
-        }
-         
-        if(value == null) {
-            return false;
-        }
-         
-        return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
+        UserCRUD d= new UserCRUD();
+        uses = d.getAllUsers();
     }
 
-    public List<Users> getCars() {
-        return uses;
+    public ArrayList<Users> getUses() {
+         UserCRUD d= new UserCRUD();
+        return d.getAllUsers();
     }
 
-    public void setCars(List<Users> uses) {
+    public void setUses(ArrayList<Users> uses) {
         this.uses = uses;
     }
+     
+   
 
-    public List<Users> getFilteredCars() {
+
+
+    public ArrayList<Users> getFilteredCars() {
         return filteredCars;
     }
 
-    public void setFilteredCars(List<Users> filteredCars) {
+    public void setFilteredCars(ArrayList<Users> filteredCars) {
         this.filteredCars = filteredCars;
     }
+*/
+    private String categorie, description, nom;
+    private int dispo,id;
+// insert getter setter here
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getDispo() {
+        return dispo;
+    }
+
+    public void setDispo(int dispo) {
+        this.dispo = dispo;
+    }
     
+    
+public ArrayList<UserView> getMessages() {
+        return UserCRUD.getAllUsers();
+    }
+
+
+public String reserver(UserView o){
+    //LoginBean login= new LoginBean();
+    System.out.println("*********************");
+    
+    
+    /*if (login.getSessionnom()!=""){
+        System.out.println("logiiiiiiiiiiiiiiiiiiin");
+    boolean result = UserDAO.reserver(login.getSessionid(),o.id,o.nom);
+    return "resources?faces-redirect=true";
+    }
+    else{
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaa");
+        return "login?faces-redirect=true";
+    }*/
+        return null;
+
+}
 }

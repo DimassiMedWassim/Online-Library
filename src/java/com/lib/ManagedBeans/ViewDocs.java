@@ -8,7 +8,6 @@ package com.lib.ManagedBeans;
 import com.lib.util.DocCRUD;
 import java.sql.Connection;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
@@ -19,7 +18,7 @@ import javax.annotation.ManagedBean;
  */
 @ManagedBean
 @Named(value = "viewDocs")
-@Dependent
+
 public class ViewDocs {
     private List<Doc> docs;
     private List<Doc> ranDocs;
