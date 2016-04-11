@@ -58,6 +58,41 @@ and open the template in the editor.
             <p:commandButton  value="Logout" action ="#{loginAdmin.logout}" icon="ui-icon-extlink" />
         </f:facet>
     </p:menubar>
+    
+    
+    
+    
 </h:form>
+        
+        <h:form id="form">
+            <p:dataTable var="doc" value="#{lazydocVeiw.lazyModel}" paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{lazydocVeiw.selectedDoc}" id="carTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{lazydocVeiw.onRowSelect}" update=":form:carDetail" oncomplete="PF('carDialog').show()" />
+        <p:column headerText="Id" sortBy="#{doc.id}" filterBy="#{doc.id}">
+            <h:outputText value="#{doc.id}" />
+        </p:column>
+        <p:column headerText="Auteur" sortBy="#{doc.auteur}" filterBy="#{doc.auteur}">
+            <h:outputText value="#{doc.auteur}" />
+        </p:column>
+        <p:column headerText="DateSortie" sortBy="#{doc.dateSortie}" filterBy="#{doc.dateSortie}">
+            <h:outputText value="#{doc.dateSortie}" />
+        </p:column>
+        <p:column headerText="Langage" sortBy="#{doc.langage}" filterBy="#{doc.langage}">
+            <h:outputText value="#{doc.langage}" />
+        </p:column>
+    </p:dataTable>
+ 
+    <p:dialog header="Doc Detail" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty lazydocVeiw.selectedDoc}" columnClasses="label,value">
+
+                <h:outputText value="Id:" />
+ 
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+</h:form>
+
     </h:body>
 </html>

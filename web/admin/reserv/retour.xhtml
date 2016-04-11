@@ -59,5 +59,46 @@ and open the template in the editor.
         </f:facet>
     </p:menubar>
 </h:form>
+        
+        
+        
+        
+        <h:form id="tform">
+    <p:dataTable var="doc" value="#{dtLazyView.lazyModel}" paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{dtLazyView.selectedCar}" id="docTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{dtLazyView.onRowSelect}" update=":form:docDetail" oncomplete="PF('docDialog').show()" />
+        <p:column headerText="Id" sortBy="#{doc.id}" filterBy="#{doc.id}">
+            <h:outputText value="#{doc.id}" />
+        </p:column>
+        <p:column headerText="Year" sortBy="#{doc.year}" filterBy="#{doc.year}">
+            <h:outputText value="#{doc.year}" />
+        </p:column>
+        <p:column headerText="Brand" sortBy="#{doc.brand}" filterBy="#{doc.brand}">
+            <h:outputText value="#{doc.brand}" />
+        </p:column>
+        <p:column headerText="Color" sortBy="#{doc.color}" filterBy="#{doc.color}">
+            <h:outputText value="#{doc.color}" />
+        </p:column>
+    </p:dataTable>
+ 
+    <p:dialog header="Car Detail" widgetVar="docDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="docDetail" style="text-align:center;">
+            <p:panelGrid  columns="2"  columnClasses="label,value">
+                   <p:outputLabel for="mask" value="Mask:" />
+        <p:calendar id="mask" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+        <p:commandButton value="Submit" update="msgs" actionListener="#{calendarView.click}" icon="ui-icon-check" />
+ 
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+</h:form>
+        <h:form id="form">
+    <h:panelGrid columns="2" cellpadding="5"></h:panelGrid>        
+        
+        
+
+        </h:form>
+ 
     </h:body>
 </html>
