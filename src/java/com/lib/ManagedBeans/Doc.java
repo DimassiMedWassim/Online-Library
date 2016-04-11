@@ -20,6 +20,7 @@ public class Doc {
     private String img;
     private String dateSortie;
     private String langage;
+    private String description;
     
     /**
      * Creates a new instance of Doc
@@ -28,7 +29,7 @@ public class Doc {
 
     }
 
-    public Doc(String id, String titre, String auteur, String categorie, String img, String dateSortie, String langage) {
+    public Doc(String id, String titre, String auteur, String categorie, String img, String dateSortie, String langage,String description) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -36,6 +37,15 @@ public class Doc {
         this.img = img;
         this.dateSortie = dateSortie;
         this.langage = langage;
+        this.description = description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
     
     public String getId() {

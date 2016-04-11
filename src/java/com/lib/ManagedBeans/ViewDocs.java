@@ -30,6 +30,16 @@ public class ViewDocs {
         docs = dc.getAllDocs();
         
     }
+    
+    public void categories(String categorie){
+        DocCRUD dc = new DocCRUD();
+        this.docs = dc.getCategorieDocs(categorie);
+    }
+    
+    public void viewAll(){
+        DocCRUD dc = new DocCRUD();
+        docs = dc.getAllDocs();
+    }
 
     public List<Doc> getDocs() {
         return docs;

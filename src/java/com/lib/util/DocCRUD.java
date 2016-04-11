@@ -40,6 +40,7 @@ public class DocCRUD {
                 doc.setLangage(rs.getString(5));
                 doc.setDateSortie(rs.getString(6));
                 doc.setImg(rs.getString(7));
+                doc.setDescription(rs.getString(8));
                 
                 docs.add(doc);
             }
@@ -79,6 +80,56 @@ public class DocCRUD {
                 cat=rs.getString(1);
             }
             return cat;
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
+        }
+    }
+    
+    public List<String> getAllCategories(){
+        try {
+            Connection con = DataConnect.getConnection();
+            String q = "select nom from Categorie";
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q);
+            List<String> cat = new ArrayList<String>();
+            while(rs.next()){
+                cat.add(rs.getString(1));
+            }
+            return cat;
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
+        }
+    } 
+    
+    
+    
+    public List<Doc> getCategorieDocs(String cat){
+        try {
+            
+            Connection con = DataConnect.getConnection();
+            String q = "select * from Livre l, Categorie c where c.id_cat=l.id_cat and c.nom = '"+cat+"'";
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q);
+            List<Doc> docs = new ArrayList<Doc>() ;
+            while(rs.next()){
+                Doc doc = new Doc();
+                doc.setId(rs.getString(1));
+                doc.setTitre(rs.getString(2));
+                doc.setAuteur(this.getAuteur(rs.getString(3)));
+                doc.setCategorie(this.getCategorie(rs.getString(4)));
+                doc.setLangage(rs.getString(5));
+                doc.setDateSortie(rs.getString(6));
+                doc.setImg(rs.getString(7));
+                doc.setDescription(rs.getString(8));
+                
+                System.out.println(rs.getString(2));
+                docs.add(doc);
+            }
+            return docs;
 
         } catch (Exception e) {
             System.err.println(e.toString());

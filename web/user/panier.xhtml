@@ -17,8 +17,8 @@ and open the template in the editor.
     <h:body>
         
         <h:form>
-            <p:messages autoUpdate="true"/>
-            <p:accordionPanel multiple="true" value="#{panier.docs}" var="doc">
+            <p:growl id="messages"/>
+            <p:accordionPanel multiple="true" value="#{panier.docs}" var="doc" id="acc">
                 <p:tab title="#{doc.titre}">
                     <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
                         <p:graphicImage value="../#{doc.img}" width="121" height="175"/> 
@@ -40,7 +40,7 @@ and open the template in the editor.
                                 <p:button value="Ajouter" icon="ui-icon-star">
 
                                 </p:button>
-                                <h:commandButton value="Supprimer" actionListener="#{panier.addDoc()}"/>
+                                <p:commandButton value="Supprimer" update="acc" actionListener="#{panier.deleteDoc(doc)}"/>
 
                                
 
