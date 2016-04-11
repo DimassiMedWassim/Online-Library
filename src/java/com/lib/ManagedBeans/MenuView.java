@@ -25,6 +25,7 @@ public class MenuView {
     public void delete() {
         addMessage("Success", "Data deleted");
     }
+    
      
     public void addMessage(String summary, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);

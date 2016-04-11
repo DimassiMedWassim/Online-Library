@@ -7,9 +7,12 @@ package com.lib.ManagedBeans;
 
 import com.lib.util.LoginVal;
 import com.lib.util.SessionBean;
+import com.lib.util.UserCRUD;
+import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -62,6 +65,13 @@ public class LoginUser {
                             "Please enter correct username and Password"));
             return "login";
         }
+    }
+    
+    public String logout() throws IOException {
+        System.out.println("logout");
+        HttpSession session = SessionBean.getSession();
+        session.invalidate();
+        return "login";
     }
 
 }

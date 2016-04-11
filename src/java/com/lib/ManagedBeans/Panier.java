@@ -5,8 +5,10 @@
  */
 package com.lib.ManagedBeans;
 
+import com.lib.util.SessionBean;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
@@ -28,7 +30,7 @@ public class Panier {
     }
     
     public void addDoc(Doc doc){
-         addMessage("Ce document existe déjà dans le panier");
+         
         if(docs.contains(doc)){
             addMessage("Ce document existe déjà dans le panier");
         }else{
@@ -54,4 +56,16 @@ public class Panier {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
+    public void confirmAll(){
+        
+        for(Doc doc : docs){
+            if(doc.isDispo()){
+                doc.reserver();
+                addMessage("Success");
+            }
+            else{
+                addMessage(doc.getTitre()+" n'est pas disponible");
+            }
+        }
+    }
 }

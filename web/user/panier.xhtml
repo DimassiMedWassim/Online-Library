@@ -9,15 +9,41 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Panier</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        
+
         <h:form>
             <p:growl id="messages"/>
+            <p:menubar>
+                <p:menuitem value="Home" icon="ui-icon-home" outcome="accueil"/>
+                <c:if test="#{empty sessionScope.username}">
+                    <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                </c:if>
+                <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
+
+
+
+
+                <f:facet name="options">
+
+                    <p:commandButton icon="ui-icon-search" action="search"/>
+                    <p:commandButton value="Réserver tout" style="float: inside;background-color: #e38d13;float: right;"/>
+                    
+                        <c:if test="#{!empty sessionScope.username}">
+                        <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
+                        </c:if>
+                </f:facet>
+            </p:menubar>           
+
+            
+            <h1 style="text-align: center;color: blue;">Panier </h1>
+            
             <p:accordionPanel multiple="true" value="#{panier.docs}" var="doc" id="acc">
                 <p:tab title="#{doc.titre}">
                     <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
@@ -37,12 +63,10 @@ and open the template in the editor.
 
                                 <h:outputText value="Categorie: " />
                                 <h:outputText value="#{doc.categorie}" style="font-weight: bold"/>
-                                <p:button value="Ajouter" icon="ui-icon-star">
 
-                                </p:button>
-                                <p:commandButton value="Supprimer" update="acc" actionListener="#{panier.deleteDoc(doc)}"/>
+                                <p:commandButton value="Supprimer" update="acc" icon="ui-icon-trash" actionListener="#{panier.deleteDoc(doc)}"/>
 
-                               
+
 
                             </h:panelGrid>
                         </p:outputPanel>
@@ -50,6 +74,7 @@ and open the template in the editor.
                     </h:panelGrid>
                 </p:tab>
             </p:accordionPanel>
+            
         </h:form>
     </h:body>
 </html>

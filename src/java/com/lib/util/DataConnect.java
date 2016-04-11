@@ -17,7 +17,7 @@ import java.sql.DriverManager;
 public class DataConnect {
         private static String url="jdbc:mysql://127.0.0.1:3306/online_lib";
         private static String name="root";
-        private static String pwd="hidrothebest";
+        private static String pwd="96496950";
         private static String driver="com.mysql.jdbc.Driver";
     
         public static Connection getConnection() {
