@@ -7,6 +7,7 @@ package com.lib.util;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * @author hidro
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class SessionBean {
  
     public static HttpSession getSession() {

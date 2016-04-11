@@ -57,4 +57,27 @@
         <managed-bean-class>com.lib.ManagedBeans.ViewDocs</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>user</managed-bean-name>
+        <managed-bean-class>com.lib.ManagedBeans.User</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <navigation-rule>
+        <from-view-id>/user/accueil.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/user/accueil.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>search</from-outcome>
+            <to-view-id>/user/search.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/accueil.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/accueil.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

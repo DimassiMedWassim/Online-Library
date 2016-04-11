@@ -5,6 +5,11 @@
  */
 package com.lib.ManagedBeans;
 
+import com.lib.util.DataConnect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 
 
 /**
@@ -104,5 +109,46 @@ public class Doc {
         this.langage = langage;
     }
     
+    public boolean isDispo(){
+        String q = "select count( * ) FROM Exemplaire WHERE id_livre = '" +id+"' AND etat = 'dispo'";
+        try {
+            Connection con = DataConnect.getConnection();
+            
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q);
+            int nb = 0;
+            while(rs.next()){
+                nb=rs.getInt(1);
+            }
+            if(nb>0){
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        return false;
+    }
+    
+    public void reserver(){
+        String q1 ="select id_exemp FROM Exemplaire WHERE id_livre = '" +id+"' AND etat = 'dispo'";
+        String q2="UPDATE Exemplaire set etat='reserve' where id_exemp='";
+        try {
+            Connection con = DataConnect.getConnection();
+            
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q1);
+            String idex="";
+            while(rs.next()){
+                idex=rs.getString(1);
+            }
+            int x = commande.executeUpdate(q2+idex+"'");
+            
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+        
+    }
     
 }

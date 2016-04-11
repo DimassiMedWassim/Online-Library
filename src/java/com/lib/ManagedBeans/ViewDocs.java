@@ -22,23 +22,32 @@ import javax.annotation.ManagedBean;
 public class ViewDocs {
     private List<Doc> docs;
     private List<Doc> ranDocs;
+    private List<Doc> catDocs;
+
+    public void setCatDocs(List<Doc> catDocs) {
+        this.catDocs = catDocs;
+    }
+
+    public List<Doc> getCatDocs() {
+        return catDocs;
+    }
     /**
      * Creates a new instance of ViewDocs
      */
     public ViewDocs() {
         DocCRUD dc = new DocCRUD();
         docs = dc.getAllDocs();
-        
+        viewAll();
     }
     
     public void categories(String categorie){
         DocCRUD dc = new DocCRUD();
-        this.docs = dc.getCategorieDocs(categorie);
+        this.catDocs = dc.getCategorieDocs(categorie);
     }
     
     public void viewAll(){
         DocCRUD dc = new DocCRUD();
-        docs = dc.getAllDocs();
+        catDocs = dc.getAllDocs();
     }
 
     public List<Doc> getDocs() {

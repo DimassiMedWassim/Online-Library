@@ -23,17 +23,20 @@ and open the template in the editor.
                 <p:messages id="messages"/>
 
                 <p:menubar>
-                    <p:menuitem value="Home" icon="ui-icon-home" url="accueil.xhtml"/>
-
-                    <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="accueil"/>
+                    <c:if test="#{empty sessionScope.username}">
+                        <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                    </c:if>
                     <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
 
 
 
 
                     <f:facet name="options">
-                        <p:commandButton value="Rechercher" icon="ui-icon-search"/>
-                        <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                        <p:commandButton value="Rechercher" icon="ui-icon-search" action="search"/>
+                        <c:if test="#{!empty sessionScope.username}">
+                        <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
+                    </c:if>
                     </f:facet>
                 </p:menubar>           
             </h:form>
@@ -66,7 +69,7 @@ and open the template in the editor.
 
                 <h:form id="list">
                     <p:messages id="msg"/>
-                    <p:accordionPanel multiple="true" value="#{viewDocs.docs}" var="doc" >
+                    <p:accordionPanel multiple="true" value="#{viewDocs.catDocs}" var="doc" >
                         <p:tab title="#{doc.titre}">
                             <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
                                 <p:graphicImage value="../#{doc.img}" width="121" height="175"/> 
@@ -74,7 +77,7 @@ and open the template in the editor.
                                 <p:outputPanel style="width:80%;margin-left: 1cm;margin-right: 0cm"> 
                                     <h:outputText value="#{doc.description}"/>
                                 </p:outputPanel>
-                                <p:outputPanel style="width:80%;margin-left: cm;margin-right: 2cm">
+                                <p:outputPanel style="width:80%;margin-left:1cm;margin-right: 2cm">
                                     <h:panelGrid columns="2" cellpadding="5">
 
                                         <h:outputText value="Auteur: " />
