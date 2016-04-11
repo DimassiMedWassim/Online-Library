@@ -37,5 +37,25 @@ and open the template in the editor.
          <f:param name="i" value="5" />
      </p:menuitem>
      </p:tabMenu>
+        
+                         <h:form>
+                             <p:dataTable id="table" var="obj" value="#{viewDocs.docs}" >
+                <p:growl id="growl" life="2000" />
+                <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.id}" />
+        </p:column>
+                <p:column filterBy="#{obj.categorie}" headerText="categorie" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.categorie}" />
+        </p:column>
+                <p:column filterBy="#{obj.titre}" headerText="titre" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.titre}" />
+        </p:column>
+                <p:column filterBy="#{obj.langage}" headerText="langage" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.langage}" />
+        </p:column>
+          
+  </p:dataTable>
+</h:form> 
+        
     </h:body>
 </html>

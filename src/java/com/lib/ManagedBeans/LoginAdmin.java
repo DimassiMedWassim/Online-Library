@@ -52,7 +52,7 @@ public class LoginAdmin implements Serializable{
             HttpSession session = SessionBean.getSession();
             System.out.println(username);
             System.out.println(password);
-            session.setAttribute("username", username);
+            session.setAttribute("admin", username);
             return "admin";
         } else {
             FacesContext.getCurrentInstance().addMessage(

@@ -37,6 +37,14 @@ public class SessionBean {
         else
             return null;
     }
+
+        public static String getAdmin() {
+        HttpSession session = getSession();
+        if (session != null)
+            return (String) session.getAttribute("admin");
+        else
+            return null;
+    }
     public SessionBean() {
     }
     

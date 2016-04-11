@@ -37,5 +37,28 @@ and open the template in the editor.
          <f:param name="i" value="5" />
      </p:menuitem>
      </p:tabMenu>
+         <h:form>
+           
+ 
+             <p:dataTable id="table" var="obj" value="#{resView.res}" >
+                <p:growl id="growl" life="2000" />
+                <p:column filterBy="#{obj.idut}" headerText="id utilisateur" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.idut}" />
+        </p:column>
+                <p:column filterBy="#{obj.idex}" headerText="id exemplaire" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.idex}" />
+        </p:column>
+                <p:column filterBy="#{obj.dateres}" headerText="date reservation" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.dateres}" />
+        </p:column>
+                <p:column filterBy="#{obj.dateprev}" headerText="date prevu de retour" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.dateprev}" />
+        </p:column>
+                <p:column filterBy="#{obj.dateretour}" headerText="date de retour" footerText="" filterMatchMode="contains">
+                    <h:outputText value="#{obj.dateretour}" />
+        </p:column>
+  
+  </p:dataTable>
+</h:form> 
     </h:body>
 </html>

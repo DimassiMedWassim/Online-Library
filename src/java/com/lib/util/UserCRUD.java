@@ -37,12 +37,10 @@ public class UserCRUD {
             DataConnect.close(con);
         }
     }
-    public static ArrayList<UserView> getAllUsers() {
-        ArrayList<UserView> users = new ArrayList<UserView>();
-             System.out.println("2");
+    public static ArrayList<Users> getAllUsers() {
+        ArrayList<Users> users = new ArrayList<Users>();
         try {
             Connection con = DataConnect.getConnection();
-            System.out.println("-------------------------------------------------------");
             String q = "select * from Utilisateur";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
@@ -50,9 +48,46 @@ public class UserCRUD {
             while(rs.next()){
                 System.out.println("1");
                 System.out.println(rs.getString(1));
-                UserView user = new UserView();
+                Users user = new Users();
+                user.setId(rs.getString(1));
                 user.setNom(rs.getString(2));
-                user.setId(rs.getInt(1));
+                user.setPrenom(rs.getString(3));
+                user.setMail(rs.getString(4));
+                user.setAddress(rs.getString(5));
+                user.setPass(rs.getString(6));
+                user.setLogin(rs.getString(7));
+                user.setSanction(rs.getString(8));
+                user.setValid(rs.getString(9));
+
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            return null;
+        }
+    }
+
+    public static ArrayList<Users> getNVUser() {
+        
+        ArrayList<Users> users = new ArrayList<Users>();
+        try {
+            
+            Connection con = DataConnect.getConnection();
+            String q = "select * from Utilisateur where valid='0'";
+            Statement commande = con.createStatement();
+            ResultSet rs = commande.executeQuery(q);
+            while(rs.next()){
+                Users user = new Users();
+                user.setId(rs.getString(1));
+                user.setNom(rs.getString(2));
+                user.setPrenom(rs.getString(3));
+                user.setMail(rs.getString(4));
+                user.setAddress(rs.getString(5));
+                user.setPass(rs.getString(6));
+                user.setLogin(rs.getString(7));
+                user.setSanction(rs.getString(8));
+                user.setValid(rs.getString(9));
 
                 users.add(user);
             }
