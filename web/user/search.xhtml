@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Search</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <p:messages id="messages"/>
+            <p:menubar>
+                <p:menuitem value="Home" icon="ui-icon-home" url="accueil.xhtml"/>
+                <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
+                <f:facet name="options">
+                    <p:commandButton value="Rechercher" icon="ui-icon-search"/>
+                    <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                </f:facet>
+            </p:menubar>           
+        </h:form>
+
+        <h:form id="form">
+
+            <p:panel style="margin-top: 5px;">
+                <p:inputText placeholder="Rechercher..." size="35" style="margin-left: 10cm;" />
+                <p:commandButton value="Rechercher" icon="ui-icon-search" />
+                <ui:repeat value="#{viewDocs.docs}"  var="doc" >
+                    <h:panelGrid columns="2" style="width:100%; margin-left: 10cm;" columnClasses="logo,detail">
+                        <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">
+                            
+                            <p:graphicImage value="../#{doc.img}" width="50px" height="50px" /> 
+                        </p:commandLink>
+
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                
+                                <h:outputText value="#{doc.titre}" style="font-weight: bold;text-align: left;"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </ui:repeat>
+                <p:dialog header="Doc Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                    <p:outputPanel id="carDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2"  columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage value="../livre/godfather1.jpg"/> 
+                            </f:facet>
+
+                            <h:outputText value="Id:" />
+                            <h:outputText value="0000" />
+
+                            <h:outputText value="Year" />
+                            <h:outputText value="000" />
+
+                            <h:outputText value="Color:" />
+                            <h:outputText value="0000" />
+
+                            <h:outputText value="Price" />
+                            <h:outputText value="0000" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+
+       
+        </p:panel>
+        </h:form>
+    </h:body>
+</html>

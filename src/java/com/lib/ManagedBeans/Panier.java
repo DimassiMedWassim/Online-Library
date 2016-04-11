@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -25,11 +27,14 @@ public class Panier {
         docs = new ArrayList<Doc>();
     }
     
-    public boolean addDoc(Doc doc){
-        if(docs.add(doc)){
-            return(true);
+    public void addDoc(Doc doc){
+         addMessage("Ce document existe déjà dans le panier");
+        if(docs.contains(doc)){
+            addMessage("Ce document existe déjà dans le panier");
+        }else{
+            docs.add(doc);
         }
-        return false;
+        
     }
 
     public List<Doc> getDocs() {
@@ -38,6 +43,15 @@ public class Panier {
 
     public void setDocs(List<Doc> docs) {
         this.docs = docs;
+    }
+    
+    public void deleteDoc(Doc doc){
+        docs.remove(doc);
+        addMessage("deleted");
+    }
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
 }
