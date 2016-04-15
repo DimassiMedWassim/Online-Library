@@ -33,10 +33,10 @@ and open the template in the editor.
                 <f:facet name="options">
 
                     <p:commandButton icon="ui-icon-search" action="search"/>
-                    <p:commandButton value="Réserver tout" style="float: inside;background-color: #e38d13;float: right;"/>
+                    
                     
                         <c:if test="#{!empty sessionScope.username}">
-                        <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
+                        <p:commandButton value="Logout" ajax="false" onclick="return confirm('Etes vous sur de vouloir déconnecter ?')" icon="ui-icon-extlink" action="#{loginUser.logout}" />
                         </c:if>
                 </f:facet>
             </p:menubar>           
@@ -45,7 +45,7 @@ and open the template in the editor.
             <h1 style="text-align: center;color: blue;">Panier </h1>
             
             <p:accordionPanel multiple="true" value="#{panier.docs}" var="doc" id="acc">
-                <p:tab title="#{doc.titre}">
+                <p:tab title="#{doc.titre}" rendered="#{doc.checkDispo()}">
                     <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
                         <p:graphicImage value="../#{doc.img}" width="121" height="175"/> 
 
@@ -66,7 +66,7 @@ and open the template in the editor.
 
                                 <p:commandButton value="Supprimer" update="acc" icon="ui-icon-trash" actionListener="#{panier.deleteDoc(doc)}"/>
 
-
+                                <p:commandButton value="Réserver" icon="ui-icon-tag" update="acc" actionListener="#{doc.reserver}" rendered="#{doc.checkDispo()}"/>
 
                             </h:panelGrid>
                         </p:outputPanel>

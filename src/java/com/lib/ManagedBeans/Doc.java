@@ -9,6 +9,11 @@ import com.lib.util.DataConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 
 
@@ -16,6 +21,9 @@ import java.sql.Statement;
  *
  * @author wassim
  */
+@ManagedBean
+@RequestScoped
+
 public class Doc {
 
     private String id;
@@ -26,6 +34,8 @@ public class Doc {
     private String dateSortie;
     private String langage;
     private String description;
+    private boolean dispo;
+    
     
     /**
      * Creates a new instance of Doc
@@ -43,6 +53,8 @@ public class Doc {
         this.dateSortie = dateSortie;
         this.langage = langage;
         this.description = description;
+        this.dispo= checkDispo();
+        System.out.println(dispo);
     }
 
     public void setDescription(String description) {
@@ -109,14 +121,15 @@ public class Doc {
         this.langage = langage;
     }
     
-    public boolean isDispo(){
-        String q = "select count( * ) FROM Exemplaire WHERE id_livre = '" +id+"' AND etat = 'dispo'";
+    public boolean checkDispo(){
+        System.out.println("id:"+this.id);
+        String q = "select count(*) FROM Exemplaire WHERE id_livre = "+id+" AND etat = 'dispo'";
         try {
             Connection con = DataConnect.getConnection();
-            
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             int nb = 0;
+            
             while(rs.next()){
                 nb=rs.getInt(1);
             }
@@ -126,13 +139,23 @@ public class Doc {
 
         } catch (Exception e) {
             System.err.println(e.toString());
+            return false;
         }
         return false;
     }
+
+    public void setDispo(boolean dispo) {
+        this.dispo = dispo;
+    }
+
+    public boolean isDispo() {
+        return dispo;
+    }
     
     public void reserver(){
-        String q1 ="select id_exemp FROM Exemplaire WHERE id_livre = '" +id+"' AND etat = 'dispo'";
+        String q1 ="select id_exemp FROM Exemplaire WHERE id_livre = "+this.id+" AND etat = 'dispo'";
         String q2="UPDATE Exemplaire set etat='reserve' where id_exemp='";
+        String q3="insert into Reservation values(";
         try {
             Connection con = DataConnect.getConnection();
             
@@ -142,13 +165,21 @@ public class Doc {
             while(rs.next()){
                 idex=rs.getString(1);
             }
+            
             int x = commande.executeUpdate(q2+idex+"'");
+            
+            addMessage("Document réservé");
             
 
         } catch (Exception e) {
             System.err.println(e.toString());
         }
         
+    }
+    
+    public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
 }

@@ -6,18 +6,23 @@
 package com.lib.util;
 
 import com.lib.ManagedBeans.Doc;
-import java.sql.Connection;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.mysql.jdbc.Connection;
 import java.sql.Statement;
 import java.util.List;
 import com.lib.ManagedBeans.Doc;
 import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author wassim
  */
+@ManagedBean
+@SessionScoped
+
 public class DocCRUD {
 
     public DocCRUD() {
@@ -26,13 +31,15 @@ public class DocCRUD {
 
     public List<Doc> getAllDocs() {
         List<Doc> docs = new ArrayList<Doc>();
+        Connection con =DataConnect.getConnection();
         try {
-            Connection con = DataConnect.getConnection();
+            
             String q = "select * from Livre";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             while(rs.next()){
                 Doc doc = new Doc();
+                
                 doc.setId(rs.getString(1));
                 doc.setTitre(rs.getString(2));
                 doc.setAuteur(this.getAuteur(rs.getString(3)));
@@ -48,6 +55,8 @@ public class DocCRUD {
         } catch (Exception e) {
             System.err.println(e.toString());
             return null;
+        }finally {
+            DataConnect.close((com.mysql.jdbc.Connection) con);
         }
     }
     
@@ -108,9 +117,10 @@ public class DocCRUD {
     
     
     public List<Doc> getCategorieDocs(String cat){
+        Connection con = DataConnect.getConnection();
         try {
             
-            Connection con = DataConnect.getConnection();
+            
             String q = "select * from Livre l, Categorie c where c.id_cat=l.id_cat and c.nom = '"+cat+"'";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
@@ -134,6 +144,8 @@ public class DocCRUD {
         } catch (Exception e) {
             System.err.println(e.toString());
             return null;
+        }finally {
+            DataConnect.close(con);
         }
     }
     

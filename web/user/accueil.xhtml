@@ -28,15 +28,18 @@ and open the template in the editor.
                         <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
                     </c:if>
                     <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
-
+                    <c:if test="#{empty sessionScope.username}">
+                        <p:menuitem value="SignIn" icon="ui-icon-locked" url="signIn.xhtml"/>
+                    </c:if>
+                    <p:menuitem value="Rechercher" icon="ui-icon-search" url="search.xhtml" style="float: left"/>
 
 
 
                     <f:facet name="options">
-                        <p:commandButton value="Rechercher" icon="ui-icon-search" action="search"/>
+                        <p:menuitem value="Rechercher" icon="ui-icon-search" action="search"/>
                         <c:if test="#{!empty sessionScope.username}">
-                        <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
-                    </c:if>
+                            <p:commandButton value="Logout" ajax="false" onclick="return confirm('Etes vous sur de vouloir déconnecter ?')" icon="ui-icon-extlink" action="#{loginUser.logout}" />
+                        </c:if>
                     </f:facet>
                 </p:menubar>           
             </h:form>
@@ -59,16 +62,16 @@ and open the template in the editor.
                                 <p:menuitem value="Consulter" url="panier.xhtml" icon ="ui-icon-cart" />
                             </p:submenu>
                             <p:submenu label="Connexion">
-                                
-                                <p:menuitem value="Déconnexion" icon="ui-icon-power"/>
-                                
+
+                                <p:menuitem value="Déconnexion" ajax="false"  action="#{loginUser.logout}" />
+
                             </p:submenu>
                         </p:menu>
                     </h:form>
                 </p:column>
 
                 <h:form id="list">
-                    <p:messages id="msg"/>
+                    
                     <p:accordionPanel multiple="true" value="#{viewDocs.catDocs}" var="doc" >
                         <p:tab title="#{doc.titre}">
                             <h:panelGrid columns="3"  columnClasses="logo,description,detail"  >
@@ -80,6 +83,9 @@ and open the template in the editor.
                                 <p:outputPanel style="width:80%;margin-left:1cm;margin-right: 2cm">
                                     <h:panelGrid columns="2" cellpadding="5">
 
+                                        <h:outputText value="ID: " />
+                                        <h:outputText value="#{doc.id}" style="font-weight: bold"/>
+
                                         <h:outputText value="Auteur: " />
                                         <h:outputText value="#{doc.auteur}" style="font-weight: bold"/>
 
@@ -88,12 +94,20 @@ and open the template in the editor.
 
                                         <h:outputText value="Categorie: " />
                                         <h:outputText value="#{doc.categorie}" style="font-weight: bold"/>
-                                        <p:commandButton value="Ajouter" icon="ui-icon-cart" actionListener="#{panier.addDoc(doc)}"/>
+                                        <c:if test="#{!empty sessionScope.username}" >
+                                        <p:commandButton value="Ajouter" update=":list" icon="ui-icon-cart" actionListener="#{panier.addDoc(doc)}" rendered="#{doc.checkDispo()}"/>
+                                        
+                                            
+                                                <p:commandButton value="Réserver" update=":list" icon="ui-icon-tag" actionListener="#{doc.reserver}" rendered="#{doc.checkDispo()}"/>
+                                            </c:if>
+                                        
 
-                                        <p:commandButton value="Réserver" icon="ui-icon-tag" actionListener="#{panier.addDoc(doc)}"/>
+                                        <h:outputText value="Disponibe:"/>
 
-
-
+                                       
+                                        <p:graphicImage value="../img/check.png" width="40" height="40" rendered="#{doc.checkDispo()}"/>
+                                        <p:graphicImage value="../img/256.png" width="40" height="40" rendered="#{!doc.checkDispo()}"/>
+                                         
                                     </h:panelGrid>
                                 </p:outputPanel>
 

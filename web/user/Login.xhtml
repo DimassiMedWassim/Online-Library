@@ -9,57 +9,68 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     </h:head>
-    <f:view contentType="text/html">
+
+    <h:body>
+
         <h:form> 
-            
+
             <p:growl id="messages"/>
 
             <p:menubar>
-                <p:menuitem value="Home" icon="ui-icon-home" url="accueil.xhtml"/>
+                    <p:menuitem value="Home" icon="ui-icon-home" outcome="accueil"/>
+                    <c:if test="#{empty sessionScope.username}">
+                        <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                    </c:if>
+                    <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
+                    <c:if test="#{empty sessionScope.username}">
+                        <p:menuitem value="SignIn" icon="ui-icon-locked" url="signIn.xhtml"/>
+                    </c:if>
+                    <p:menuitem value="Rechercher" icon="ui-icon-search" url="search.xhtml" style="float: left"/>
 
-                <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
-                <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
 
-                
-                
 
-                
-            </p:menubar>           
+                    <f:facet name="options">
+                        <p:menuitem value="Rechercher" icon="ui-icon-search" action="search"/>
+                        <c:if test="#{!empty sessionScope.username}">
+                            <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
+                        </c:if>
+                    </f:facet>
+                </p:menubar>           
+       
+            <p:panel header="Authentification">
+
+                <p:messages autoUpdate="true"/>
+                <h:panelGrid id="grid" columns="4" cellpadding="5">
+
+                    <h:outputLabel for="username" value="Login" />
+                    <h:inputText id="username" value="#{loginUser.username}"></h:inputText>
+                    <h:message for="username"></h:message>
+                    <br /><br />
+
+                    <h:outputLabel for="password" value="Password" />
+                    <p:password id="password" value="#{loginUser.password}"/>
+                    <h:message for="password"></h:message>
+
+                </h:panelGrid>
+
+
+                <h:commandButton action="#{loginUser.login()}" value="Login"></h:commandButton>
+            </p:panel>
+            
         </h:form>
-        <h:body>
-            <h:form>
-                <p:panel header="Authentification">
-
-                    <p:messages autoUpdate="true"/>
-                    <h:panelGrid id="grid" columns="4" cellpadding="5">
-
-                        <h:outputLabel for="username" value="Login" />
-                        <h:inputText id="username" value="#{loginUser.username}"></h:inputText>
-                        <h:message for="username"></h:message>
-                        <br /><br />
-
-                        <h:outputLabel for="password" value="Password" />
-                        <p:password id="password" value="#{loginUser.password}"/>
-                        <h:message for="password"></h:message>
-
-                    </h:panelGrid>
-
-
-                    <h:commandButton action="#{loginUser.login()}" value="Login"></h:commandButton>
-                </p:panel>
-            </h:form>
-            
-            
-            
 
 
 
-        </h:body>
-    </f:view>
+
+
+
+    </h:body>
+
 </html>
