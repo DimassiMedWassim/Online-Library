@@ -9,13 +9,14 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>reservation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-
+        <b:container>
 <ui:include src="menu.xhtml" />
 
          <h:form>
@@ -41,5 +42,6 @@ and open the template in the editor.
   
   </p:dataTable>
 </h:form> 
+        </b:container>
     </h:body>
 </html>
