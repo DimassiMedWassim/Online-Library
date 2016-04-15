@@ -50,7 +50,7 @@ public class AutView {
     public void modif(Aut aut){
         try{
         Connection con = DataConnect.getConnection();
-            String q = "UPDATE Utilisateur SET  nom_auteur = '"+aut.getNom()+"' pays = '"+aut.getPays()+"' date_nais = '"+aut.getDatenais()+"' WHERE id_auteur = " + aut.getId() ;
+            String q = "UPDATE Auteur SET  nom_auteur = '"+aut.getNom()+"', pays = '"+aut.getPays()+"', date_nais = '"+aut.getDatenais()+"' WHERE id_auteur = " + aut.getId() ;
             System.out.println(q);
             Statement commande = con.createStatement();
             
