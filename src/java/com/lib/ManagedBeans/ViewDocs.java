@@ -67,5 +67,9 @@ public class ViewDocs {
         this.ranDocs = ranDocs;
     }
     
+    public String search(){
+        return "search";
+    }
+    
     
 }

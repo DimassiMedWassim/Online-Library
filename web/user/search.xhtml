@@ -17,7 +17,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        
+
 
         <h:form style="padding-left: 5px;padding-right: 5px;">
             <p:messages id="messages"/>
@@ -26,45 +26,44 @@ and open the template in the editor.
                 <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
                 <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
                 <f:facet name="options">
-                    <p:commandButton value="Rechercher" icon="ui-icon-search"/>
-                    <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                    <p:commandButton type="button" value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}"/>
                 </f:facet>
             </p:menubar>           
-        
 
-        <h1 style="text-align: center;">Rechercher </h1>
-        <b:dataTable value="#{viewDocs.docs}" var="doc" id="bcarPool" styleClass="table table-striped table-bordered" style="width:100%">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Titre" />
-                </f:facet>
-                <h:outputText value="#{doc.titre}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Auteur" />
-                </f:facet>
-                <h:outputText value="#{doc.auteur}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Categorie" />
-                </f:facet>
-                <h:outputText value="#{doc.categorie}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Action" />
-                    
-                </f:facet>
-                <p:commandButton value="Consulter"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Disponible"/>
-                </f:facet>
-            </h:column>
-        </b:dataTable>
-</h:form>
+
+            <h1 style="text-align: center;">Rechercher </h1>
+            <b:dataTable value="#{viewDocs.docs}" var="doc" id="bcarPool" styleClass="table table-striped table-bordered" style="width:100%">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Titre" />
+                    </f:facet>
+                    <h:outputText value="#{doc.titre}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Auteur" />
+                    </f:facet>
+                    <h:outputText value="#{doc.auteur}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Categorie" />
+                    </f:facet>
+                    <h:outputText value="#{doc.categorie}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Action" />
+
+                    </f:facet>
+                    <p:commandButton value="Consulter"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Disponible"/>
+                    </f:facet>
+                </h:column>
+            </b:dataTable>
+        </h:form>
     </h:body>
 </html>
