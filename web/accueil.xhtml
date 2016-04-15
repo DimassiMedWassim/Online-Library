@@ -10,7 +10,8 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>Online Library</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -31,7 +32,7 @@ and open the template in the editor.
 
 
                     <f:facet name="options">
-                        <p:commandButton value="Rechercher" icon="ui-icon-search" action="search"/>
+                        <p:commandButton value="Rechercher" icon="ui-icon-search" action="#{viewDocs.search}"/>
                         <c:if test="#{!empty sessionScope.username}">
                         <p:commandButton value="Logout" ajax="false" icon="ui-icon-extlink" action="#{loginUser.logout}" />
                     </c:if>

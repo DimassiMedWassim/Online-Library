@@ -84,10 +84,11 @@ public class SignIn {
     }
     
     public String sign(){
+        System.out.println(login);
+            System.out.println(pass);
         if(UserCRUD.addUser(this)){
             HttpSession session = SessionBean.getSession();
-            System.out.println(login);
-            System.out.println(pass);
+            
             session.setAttribute("username", login);
             
             return "ok";

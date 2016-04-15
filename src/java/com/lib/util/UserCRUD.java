@@ -15,24 +15,33 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author wassim
  */
+@ManagedBean
+
 public class UserCRUD {
     
     
     public static boolean addUser(SignIn user){
         Connection con = DataConnect.getConnection();
+        System.out.println(con);
         String q = "insert into Utilisateur(nom_u,prenom_u,mail_u,adresse_u,pass,login) values( '" +user.getNom() + "','" + user.getPrenom() +"','"+ user.getMail()+"','"+user.getAdresse()+"','"+user.getPass()+"','"+user.getLogin()+"')";
+        System.out.println(q);
         try {
+            System.out.println(con);
             Statement commande = con.createStatement();
             int rs = commande.executeUpdate(q);
+            System.out.println(rs);
+            System.out.println(".............signing in .............");
             return true;
             
             
         } catch (SQLException ex) {
+            System.out.println(ex.toString());
             return false;
         }finally {
             DataConnect.close(con);
@@ -41,8 +50,9 @@ public class UserCRUD {
 
     public static ArrayList<Users> getAllUsers() {
         ArrayList<Users> users = new ArrayList<Users>();
+        Connection con = DataConnect.getConnection();
         try {
-            Connection con = DataConnect.getConnection();
+            
             String q = "select * from Utilisateur";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
@@ -67,6 +77,8 @@ public class UserCRUD {
         } catch (Exception e) {
             System.err.println(e.toString());
             return null;
+        }finally {
+            DataConnect.close(con);
         }
     }
 

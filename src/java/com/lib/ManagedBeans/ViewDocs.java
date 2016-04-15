@@ -11,17 +11,18 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author wassim
  */
 @ManagedBean
+@RequestScoped
 @Named(value = "viewDocs")
 
 public class ViewDocs {
     private List<Doc> docs;
-    private List<Doc> ranDocs;
     private List<Doc> catDocs;
 
     public void setCatDocs(List<Doc> catDocs) {
@@ -54,16 +55,16 @@ public class ViewDocs {
         return docs;
     }
 
-    public List<Doc> getRanDocs() {
-        return ranDocs;
-    }
+    
 
     public void setDocs(List<Doc> docs) {
         this.docs = docs;
     }
 
-    public void setRanDocs(List<Doc> ranDocs) {
-        this.ranDocs = ranDocs;
+    
+    
+    public String search(){
+        return "search";
     }
     
     

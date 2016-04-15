@@ -56,15 +56,10 @@ public class Panier {
     }
     
     public void confirmAll(){
-        
         for(Doc doc : docs){
-            if(doc.isDispo()){
-                doc.reserver();
-                addMessage("Success");
-            }
-            else{
-                addMessage(doc.getTitre()+" n'est pas disponible");
-            }
+            doc.reserver();
+            deleteDoc(doc);
         }
+        addMessage("Tous les documents sont réservés");
     }
 }
