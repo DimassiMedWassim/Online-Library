@@ -16,26 +16,6 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
-
-<p:tabMenu activeIndex="#{param.i-1}">
-     <p:menuitem value="Utilisateurs" outcome="utilisateurs.xhtml" icon="ui-icon-person">
-         <f:param name="i" value="0" />
-     </p:menuitem>
-     <p:menuitem value="Documents" outcome="documents.xhtml" icon="ui-icon-document">
-         <f:param name="i" value="1" />
-     </p:menuitem>
-     <p:menuitem value="Reservations" outcome="reservations.xhtml" icon="ui-icon-search">
-         <f:param name="i" value="2" />
-     </p:menuitem>
-     <p:menuitem value="Auteurs" outcome="auteur.xhtml" icon="ui-icon-wrench">
-         <f:param name="i" value="3" />
-     </p:menuitem>
-     <p:menuitem value="Categories" outcome="categories.xhtml" icon="ui-icon-star">
-         <f:param name="i" value="4" />
-     </p:menuitem>
-     <p:menuitem value="Logout" action="#{loginAdmin.logout()}" outcome="dc.xhtml" icon="ui-icon-extlink">
-         <f:param name="i" value="5" />
-     </p:menuitem>
-     </p:tabMenu>
+<ui:include src="menu.xhtml" />
     </h:body>
 </html>
