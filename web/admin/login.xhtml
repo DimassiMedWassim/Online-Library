@@ -11,23 +11,38 @@ and open the template in the editor.
     <h:head>
         <title>login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="/Online-Library/faces/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/Online-Library/faces/css/sb-admin-2.css" />
     </h:head>
     <h:body>
-     <h:form>
-         <p:growl id="growl" life="2000" />
-         <h2>Login</h2>
-         <h:panelGrid columns="2" cellpadding="5">
-             
-        <h:outputText value="Username" />
-        <p:inputText id="username" value="#{loginAdmin.username}"></p:inputText>
-         
-        <h:outputText value="Password" />
-        <p:password id="password" value="#{loginAdmin.password}"></p:password>
-        <h:message for="password"></h:message>
-        <p:commandButton value="login" id="submit" update="growl" action="#{loginAdmin.login}" styleClass="ui-priority-primary" />
-    </h:panelGrid>
-     </h:form>
-       
-
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form>
+                            <p:growl id="growl" life="2000" />
+                            <fieldset>
+                                <div class="form-group">
+                                    <h:outputText value="Username" />
+                                    <p:inputText id="username" value="#{loginAdmin.username}" styleClass="form-control"></p:inputText>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputText value="Password" />
+                                    <p:password id="password" value="#{loginAdmin.password}" styleClass="form-control"></p:password>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <p:commandButton value="login" id="submit" update="growl" action="#{loginAdmin.login}" styleClass="ui-priority-primary btn btn-lg btn-success btn-block" />
+                            </fieldset>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </h:body>
 </html>
