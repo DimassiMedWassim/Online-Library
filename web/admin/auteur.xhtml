@@ -37,11 +37,15 @@ and open the template in the editor.
          <f:param name="i" value="5" />
      </p:menuitem>
      </p:tabMenu>
-                 <h:form>
-           
+        <h:form id="form">
+          
  
                      <p:dataTable id="table" var="obj" value="#{autView.aut}" >
                 <p:growl id="growl" life="2000" />
+                 <f:facet name="header" >
+                     
+               <p:commandButton value="ADD" type="button" onclick="PF('dlgadd').show();" />
+        </f:facet>  
                 <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.id}" />
         </p:column>
@@ -54,8 +58,47 @@ and open the template in the editor.
                 <p:column filterBy="#{obj.pays}" headerText="pays" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.pays}" />
         </p:column>
-          
-  </p:dataTable>
+                <p:column style="width:80px; text-align: center">
+             
+                    <p:commandButton  update="table" value="X"  actionListener="#{autView.supp(obj)}" />
+             <p:commandButton  update="table" value="Modifie" icon="ui-icon-pencil" actionListener="#{autView.modif(obj)}" />
+         <p:commandButton update=":form:carDetail" oncomplete="PF('dlgmdf').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+            </p:commandButton>
+                </p:column>
+
+  </p:dataTable>              
+          <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Nom:" />
+            <p:inputText id="username" value="#{aut.nom}" required="true" label="Nom" />
+ 
+            <h:outputLabel for="password" value="pays:" />
+            <p:inputText id="password" value="#{aut.pays}" required="true" label="pays" />
+            <h:outputLabel for="date" value="date naissance:" />
+            <p:inputText id="date" value="#{aut.datenais}" placeholder="yyyy/MM/dd" required="true" label="date naissance" />
+               
+            <f:facet name="footer">
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{autView.add(aut)}"  />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+            <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Nom:" />
+            <p:inputText id="username" value="#{aut.nom}" required="true" label="Nom" />
+ 
+            <h:outputLabel for="password" value="pays:" />
+            <p:inputText id="password" value="#{aut.pays}" required="true" label="pays" />
+            <h:outputLabel for="date" value="date naissance:" />
+            <p:inputText id="date" value="#{aut.datenais}" placeholder="yyyy/MM/dd" required="true" label="date naissance" />
+               
+            <f:facet name="footer">
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{autView.add(aut)}"  />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+  
 </h:form> 
     </h:body>
 </html>

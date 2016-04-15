@@ -24,7 +24,6 @@ public class AuteurCRUD {
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             while(rs.next()){
-                System.out.println(rs.getString(1));
                 Aut user = new Aut();
                 user.setId(rs.getString(1));
                 user.setNom(rs.getString(2));
