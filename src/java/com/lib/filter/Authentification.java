@@ -139,7 +139,7 @@ public class Authentification implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) res;
     HttpSession session = request.getSession(false);
-    String user = (session != null) ? (String) session.getAttribute("username") : null;
+    String user = (session != null) ? (String) session.getAttribute("admin") : null;
     String loginURL = request.getContextPath() + "/faces/admin/login.xhtml";
     String adminURL = request.getContextPath() + "/faces/admin/admin.xhtml";
     String dcURL = request.getContextPath() + "/faces/admin/dc.xhtml";

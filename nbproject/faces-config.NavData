@@ -2,17 +2,32 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="admin/auteurs.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="user/acceuil.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="welcomePrimefaces.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="admin/auteur/supp.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="admin/utilisateurs.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="accueil.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="admin/login.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="admin/auteur/ajout.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="admin/document/modif.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="admin/categorie/supp.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="admin/reserv/perdu.xhtml" x="150" y="1050" zoom="true"/>
+        <Node id="admin/categories.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="admin/reserv/retour.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="admin/auteur.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="admin/categorie/ajout.xhtml" x="900" y="450" zoom="true"/>
         <Node id="index.xhtml" x="150" y="600" zoom="true"/>
         <Node id="admin/dc.xhtml" x="900" y="300" zoom="true"/>
-        <Node id="welcomePrimefaces.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="admin/utilisateurs.xhtml" x="400" y="300" zoom="true"/>
-        <Node id="admin/login.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="user/panier.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="admin/document/ajout.xhtml" x="400" y="900" zoom="true"/>
+        <Node id="user/search.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="admin/categorie/modif.xhtml" x="1650" y="150" zoom="true"/>
         <Node id="admin/admin.xhtml" x="900" y="150" zoom="true"/>
         <Node id="user/Login.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="user/signIn.xhtml" x="650" y="750" zoom="true"/>
+        <Node id="user/accueil.xhtml" x="400" y="600" zoom="true"/>
         <Node id="admin/user/userval.xhtml" x="650" y="450" zoom="true"/>
-        <Node id="admin/categories.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="admin/document/supp.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="admin/auteur/modif.xhtml" x="1150" y="450" zoom="true"/>
         <Node id="admin/reservations.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="admin/documents.xhtml" x="400" y="150" zoom="true"/>
     </Scope>

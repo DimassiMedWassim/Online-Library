@@ -14,24 +14,20 @@ import java.util.ArrayList;
  *
  * @author hidro
  */
-public class ReservationCRUD {
+public class CatCRUD {
     
-    
-    public static ArrayList<Res> getRes(){
-        ArrayList<Res> users = new ArrayList<Res>();
+    public static ArrayList<Cat> getCat(){
+        ArrayList<Cat> users = new ArrayList<Cat>();
         try {
             Connection con = DataConnect.getConnection();
-            String q = "select * from Reserver";
+            String q = "select * from Auteur";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             while(rs.next()){
                 System.out.println(rs.getString(1));
-                Res user = new Res();
-                user.setIdex(rs.getString(1));
-                user.setIdut(rs.getString(2));
-                user.setDateres(rs.getString(3));
-                user.setDateprev(rs.getString(4));
-                user.setDateretour(rs.getString(5));
+                Cat user = new Cat();
+                user.setId(rs.getString(1));
+                user.setNom(rs.getString(2));
 
                 users.add(user);
             }
@@ -40,5 +36,5 @@ public class ReservationCRUD {
             System.err.println(e.toString());
             return null;
         }
-}
+    }
 }
