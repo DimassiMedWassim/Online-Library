@@ -10,6 +10,7 @@ import com.lib.util.DataConnect;
 import com.lib.util.DocCRUD;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.inject.Named;
@@ -81,8 +82,9 @@ public class ViewDocs implements Serializable{
         try {
             commande = con.createStatement();
 
-        String q = "insert into Exemplaire (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
-            for(int i=0;i<nbr.getNb();i++){
+        String q = "insert into Exemplaire (id_livre,etat) values ('"+doc.getId()+"','dispo')"  ;
+System.out.println(q);
+        for(int i=0;i<nbr.getNb();i++){
 
                 commande.executeUpdate(q);}
         }
@@ -119,19 +121,30 @@ public class ViewDocs implements Serializable{
               System.out.println("nooo");
           }
     }
-    public void add(Doc doc,Nbrex nbr){
+    public void add(Doc doc ,Nbrex nbr){
         try{
         com.mysql.jdbc.Connection con = DataConnect.getConnection();
-            String q = "insert into Livre (titre, id_auteur , id_cat, langage,date_sortie ) values ('"+doc.getTitre()+"','"+doc.getAuteur()+"','"+doc.getId_cat()+"','"+doc.getLangage()+"','"+doc.getDateSortie()+"')" ;
+            String q = "insert into Livre (titre, id_auteur , id_cat, langage,date_sortie ) values ('"+doc.getTitre()+"','"+doc.getId_au()+"','"+doc.getId_cat()+"','"+doc.getLangage()+"','"+doc.getDateSortie()+"')" ;
             System.out.println(q);
             Statement commande = con.createStatement();
             
             commande.executeUpdate(q);
+ 
+        
+            
+             q = "select * from Livre where titre='"+doc.getTitre()+"'";
+            System.out.println(q);
+             ResultSet rs = commande.executeQuery(q);
+            while(rs.next()){
+                
+            
+                doc.setId(rs.getString(1));}
             q = "insert into Exemplaire (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
+        System.out.println(q);
             for(int i=0;i<nbr.getNb();i++){
                 commande.executeUpdate(q);
             }
-            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"supprime","success"));
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"ajouté","success"));
           }
           catch(Exception e){
               System.out.println("nooo");

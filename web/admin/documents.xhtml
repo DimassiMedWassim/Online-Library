@@ -67,10 +67,9 @@ and open the template in the editor.
            <p:rowEditor />
                     </p:column>
        <p:column headerText="add exemplaires" style="width:120px; text-align: center">
-           <p:inputText id="ex" value="#{nbrex.nb}" style="width:40px" required="true" label="ex" ></p:inputText>
-                    <p:commandButton  update="growl" value="add">
+                    <p:commandButton  update="table" value="X">
                         
-                        <p:ajax  listener="#{viewDocs.addExemp(obj,nbrex)}"/></p:commandButton>
+                        <p:ajax  listener="#{viewDocs.supp(obj)}"/></p:commandButton>
                     
 
                 </p:column>
@@ -101,12 +100,12 @@ and open the template in the editor.
             </p:inputText>
             <p:message for="cat" />    
             <h:outputLabel for="ex" value="nombre exemplaires:" />
-            <p:inputText id="ex" value="#{nbrex.nb}"  required="true" label="ex" >
+            <p:inputText id="ex" value="#{nbrex.nb}"  required="true" label="nombre exemp" >
              <f:validateDoubleRange minimum="0"  />
             </p:inputText>
-            <p:message for="cat" />   
+            <p:message for="ex" />   
             <f:facet name="footer">
-                <p:commandButton update = ":form:table" value="add"  actionListener="#{viewDocs.add(aut,nbrex)}"  />
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{viewDocs.add(doc,nbrex)}"  />
             </f:facet> 
 </p:panel>
             
