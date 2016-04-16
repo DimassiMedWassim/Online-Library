@@ -20,7 +20,7 @@ public class CatCRUD {
         ArrayList<Cat> users = new ArrayList<Cat>();
         try {
             Connection con = DataConnect.getConnection();
-            String q = "select * from Auteur";
+            String q = "select * from Categorie";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             while(rs.next()){

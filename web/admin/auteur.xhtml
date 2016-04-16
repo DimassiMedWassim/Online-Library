@@ -9,53 +9,83 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>auteur</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <b:container>
 
+<ui:include src="menu.xhtml" />
 
-<p:tabMenu activeIndex="#{param.i}">
-     <p:menuitem value="Utilisateurs" outcome="utilisateurs.xhtml" icon="ui-icon-person">
-         <f:param name="i" value="0" />
-     </p:menuitem>
-     <p:menuitem value="Documents" outcome="documents.xhtml" icon="ui-icon-document">
-         <f:param name="i" value="1" />
-     </p:menuitem>
-     <p:menuitem value="Reservations" outcome="reservations.xhtml" icon="ui-icon-search">
-         <f:param name="i" value="2" />
-     </p:menuitem>
-     <p:menuitem value="Auteurs" outcome="auteur.xhtml" icon="ui-icon-wrench">
-         <f:param name="i" value="3" />
-     </p:menuitem>
-     <p:menuitem value="Categories" outcome="categories.xhtml" icon="ui-icon-star">
-         <f:param name="i" value="4" />
-     </p:menuitem>
-     <p:menuitem value="Logout" actionListener="#{loginAdmin.logout()}" outcome="dc.xhtml" icon="ui-icon-extlink">
-         <f:param name="i" value="5" />
-     </p:menuitem>
-     </p:tabMenu>
-                 <h:form>
+<h:form id="form">
            
  
-                     <p:dataTable id="table" var="obj" value="#{autView.aut}" >
+                     <p:dataTable id="table" var="obj" value="#{autView.aut}" editable="true" >
                 <p:growl id="growl" life="2000" />
+                 <f:facet name="header" >
+             
+               <p:commandButton value="ADD" type="button" onclick="PF('dlgadd').show();" />
+        </f:facet>  
+                      <p:ajax event="rowEdit" listener="#{autView.modif(obj)}" update="growl" />
+       <p:ajax event="rowEditCancel"  update="growl" />
+ 
                 <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.id}" />
         </p:column>
                 <p:column filterBy="#{obj.nom}" headerText="nom" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.nom}" />
+                      <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.nom}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{obj.nom}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
+            
                 <p:column filterBy="#{obj.datenais}" headerText="date nais" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.datenais}" />
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{obj.datenais}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.datenais}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
+                
                 <p:column filterBy="#{obj.pays}" headerText="pays" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.pays}" />
+                    <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.pays}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.pays}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
-          
-  </p:dataTable>
+                       <p:column style="width:45px">
+           <p:rowEditor />
+                    </p:column>
+                <p:column style="width:80px; text-align: center">
+             
+                    <p:commandButton  update="table" value="X">
+                    <p:ajax  listener="#{autView.supp(obj)}"/></p:commandButton>
+                    
+
+                </p:column>
+                
+                                
+
+  </p:dataTable>              
+          <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Nom:" />
+            <p:inputText id="username" value="#{aut.nom}" required="true" label="Nom" />
+ 
+            <h:outputLabel for="password" value="pays:" />
+            <p:inputText id="password" value="#{aut.pays}" required="true" label="pays" />
+            <h:outputLabel for="date" value="date naissance:" />
+            <p:inputText id="date" value="#{aut.datenais}" placeholder="yyyy/MM/dd" required="true" label="date naissance" />
+               
+            <f:facet name="footer">
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{autView.add(aut)}"  />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+
 </h:form> 
+        </b:container>
     </h:body>
 </html>

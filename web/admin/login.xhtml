@@ -7,27 +7,42 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="/Online-Library/faces/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/Online-Library/faces/css/sb-admin-2.css" />
     </h:head>
-    <h:body>
-     <h:form>
-         <p:growl id="growl" life="2000" />
-         <h2>Login</h2>
-         <h:panelGrid columns="2" cellpadding="5">
-             
-        <h:outputText value="Username" />
-        <p:inputText id="username" value="#{loginAdmin.username}"></p:inputText>
-         
-        <h:outputText value="Password" />
-        <p:password id="password" value="#{loginAdmin.password}"></p:password>
-        <h:message for="password"></h:message>
-        <p:commandButton value="login" id="submit" update="growl" action="#{loginAdmin.login}" styleClass="ui-priority-primary" />
-    </h:panelGrid>
-     </h:form>
-       
-
+    <h:body>    
+    <b:container>
+        <b:row>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form>
+                            <p:growl id="growl" life="2000" />
+                            <fieldset>
+                                <div class="form-group">
+                                    <h:outputText value="Username" />
+                                    <p:inputText id="username" value="#{loginAdmin.username}" styleClass="form-control"></p:inputText>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputText value="Password" />
+                                    <p:password id="password" value="#{loginAdmin.password}" styleClass="form-control"></p:password>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <p:commandButton value="login" id="submit" update="growl" action="#{loginAdmin.login}" styleClass="ui-priority-primary btn btn-lg btn-success btn-block" />
+                            </fieldset>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </b:row>
+    </b:container>
     </h:body>
 </html>

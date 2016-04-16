@@ -9,53 +9,112 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title>documents</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <b:container>
 
-
-<p:tabMenu activeIndex="#{param.i}">
-     <p:menuitem value="Utilisateurs" outcome="utilisateurs.xhtml" icon="ui-icon-person">
-         <f:param name="i" value="0" />
-     </p:menuitem>
-     <p:menuitem value="Documents" outcome="documents.xhtml" icon="ui-icon-document">
-         <f:param name="i" value="1" />
-     </p:menuitem>
-     <p:menuitem value="Reservations" outcome="reservations.xhtml" icon="ui-icon-search">
-         <f:param name="i" value="2" />
-     </p:menuitem>
-     <p:menuitem value="Auteurs" outcome="auteur.xhtml" icon="ui-icon-wrench">
-         <f:param name="i" value="3" />
-     </p:menuitem>
-     <p:menuitem value="Categories" outcome="categories.xhtml" icon="ui-icon-star">
-         <f:param name="i" value="4" />
-     </p:menuitem>
-     <p:menuitem value="Logout" actionListener="#{loginAdmin.logout()}" outcome="dc.xhtml" icon="ui-icon-extlink">
-         <f:param name="i" value="5" />
-     </p:menuitem>
-     </p:tabMenu>
+<ui:include src="menu.xhtml" />
         
-                         <h:form>
-                             <p:dataTable id="table" var="obj" value="#{viewDocs.docs}" >
+                         <h:form id="form">
+           
+ 
+                             <p:dataTable id="table" var="obj" value="#{viewDocs.docs}" editable="true" >
                 <p:growl id="growl" life="2000" />
-                <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.id}" />
-        </p:column>
-                <p:column filterBy="#{obj.categorie}" headerText="categorie" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.categorie}" />
-        </p:column>
+                 <f:facet name="header" >
+             <p:commandButton value="ADD" type="button" onclick="PF('dlgadd').show();" />
+        </f:facet>  
+                <p:ajax event="rowEdit" listener="#{viewDocs.modif(obj)}" update="growl" />
+       <p:ajax event="rowEditCancel"  update="growl" />
+ 
                 <p:column filterBy="#{obj.titre}" headerText="titre" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.titre}" />
+                     <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.titre}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{obj.titre}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
                 <p:column filterBy="#{obj.langage}" headerText="langage" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.langage}" />
+                      <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.langage}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{obj.langage}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
-          
-  </p:dataTable>
+            
+                <p:column filterBy="#{obj.dateSortie}" headerText="date sortie" footerText="" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{obj.dateSortie}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.dateSortie}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+                
+                <p:column filterBy="#{obj.auteur}" headerText="auteur" footerText="" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{obj.auteur}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.auteur}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+       <p:column filterBy="#{obj.categorie}" headerText="categorie" footerText="" filterMatchMode="contains">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{obj.categorie}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.categorie}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+                       <p:column style="width:45px">
+           <p:rowEditor />
+                    </p:column>
+       <p:column headerText="add exemplaires" style="width:120px; text-align: center">
+           <p:inputText id="ex" value="#{nbrex.nb}" style="width:40px" required="true" label="ex" ></p:inputText>
+                    <p:commandButton  update="growl" value="add">
+                        
+                        <p:ajax  listener="#{viewDocs.addExemp(obj,nbrex)}"/></p:commandButton>
+                    
+
+                </p:column>
+                
+                                
+
+  </p:dataTable>              
+          <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:form>
+              <p:panel header="Validate">
+                <p:messages autoUpdate="true"/>
+            <h:outputLabel for="titre" value="Titre:" />
+            <p:inputText id="titre" value="#{doc.titre}" required="true" />
+ 
+            <h:outputLabel for="langague" value="langague:" />
+            <p:inputText id="langague" value="#{doc.langage}" required="true"  />
+            <h:outputLabel for="date" value="date de sortie:" />
+            <p:inputText id="date" value="#{doc.dateSortie}" placeholder="yyyy/MM/dd" required="true" label="date sortie" />
+            <h:outputLabel for="aut" value="auteur:" />
+            <p:inputText id="aut" value="#{doc.id_au}"  required="true" label="auteur:id" >
+            <f:validateDoubleRange minimum="0" />
+            </p:inputText>
+            <p:message for="aut" />
+            <h:outputLabel for="cat" value="categorie:" />
+            <p:inputText id="cat" value="#{doc.id_cat}"  required="true" label="categorie:id" >
+             <f:validateDoubleRange minimum="0"  />
+            </p:inputText>
+            <p:message for="cat" />    
+            <h:outputLabel for="ex" value="nombre exemplaires:" />
+            <p:inputText id="ex" value="#{nbrex.nb}"  required="true" label="ex" >
+             <f:validateDoubleRange minimum="0"  />
+            </p:inputText>
+            <p:message for="cat" />   
+            <f:facet name="footer">
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{viewDocs.add(aut,nbrex)}"  />
+            </f:facet> 
+</p:panel>
+            
+</h:form>
+        </h:panelGrid>
+    </p:dialog>
+
 </h:form> 
-        
+        </b:container>
     </h:body>
 </html>
