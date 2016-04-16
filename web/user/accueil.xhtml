@@ -95,10 +95,10 @@ and open the template in the editor.
                                         <h:outputText value="Categorie: " />
                                         <h:outputText value="#{doc.categorie}" style="font-weight: bold"/>
                                         <c:if test="#{!empty sessionScope.username}" >
-                                        <p:commandButton value="Ajouter" update=":list" icon="ui-icon-cart" actionListener="#{panier.addDoc(doc)}" rendered="#{doc.checkDispo()}"/>
+                                        <p:commandButton value="Ajouter" update=":list" icon="ui-icon-cart" actionListener="#{panier.addDoc(doc)}" disabled="#{!doc.checkDispo()}"/>
                                         
                                             
-                                                <p:commandButton value="Réserver" update=":list" icon="ui-icon-tag" actionListener="#{doc.reserver}" rendered="#{doc.checkDispo()}"/>
+                                                <p:commandButton value="Réserver" update=":list" icon="ui-icon-tag" actionListener="#{doc.reserver}" disabled="#{!doc.checkDispo()}"/>
                                             </c:if>
                                         
 

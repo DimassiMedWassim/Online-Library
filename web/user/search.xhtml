@@ -22,25 +22,25 @@ and open the template in the editor.
         <h:form style="padding-left: 5px;padding-right: 5px;">
             <p:messages id="messages"/>
             <p:menubar>
-                    <p:menuitem value="Home" icon="ui-icon-home" outcome="accueil"/>
-                    <c:if test="#{empty sessionScope.username}">
-                        <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                <p:menuitem value="Home" icon="ui-icon-home" outcome="accueil"/>
+                <c:if test="#{empty sessionScope.username}">
+                    <p:menuitem value="Login" icon="ui-icon-person" url="Login.xhtml"/>
+                </c:if>
+                <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
+                <c:if test="#{empty sessionScope.username}">
+                    <p:menuitem value="SignIn" icon="ui-icon-locked" url="signIn.xhtml"/>
+                </c:if>
+                <p:menuitem value="Rechercher" icon="ui-icon-search" url="search.xhtml" style="float: left"/>
+
+
+
+                <f:facet name="options">
+                    <p:menuitem value="Rechercher" icon="ui-icon-search" action="search"/>
+                    <c:if test="#{!empty sessionScope.username}">
+                        <p:commandButton value="Logout" ajax="false" onclick="return confirm('Etes vous sur de vouloir déconnecter ?')" icon="ui-icon-extlink" action="#{loginUser.logout}" />
                     </c:if>
-                    <p:menuitem value="Admin" icon="ui-icon-locked" url="../admin/login.xhtml"/>
-                    <c:if test="#{empty sessionScope.username}">
-                        <p:menuitem value="SignIn" icon="ui-icon-locked" url="signIn.xhtml"/>
-                    </c:if>
-                    <p:menuitem value="Rechercher" icon="ui-icon-search" url="search.xhtml" style="float: left"/>
-
-
-
-                    <f:facet name="options">
-                        <p:menuitem value="Rechercher" icon="ui-icon-search" action="search"/>
-                        <c:if test="#{!empty sessionScope.username}">
-                            <p:commandButton value="Logout" ajax="false" onclick="return confirm('Etes vous sur de vouloir déconnecter ?')" icon="ui-icon-extlink" action="#{loginUser.logout}" />
-                        </c:if>
-                    </f:facet>
-                </p:menubar>         
+                </f:facet>
+            </p:menubar>         
 
         </h:form>
         <h:form>
@@ -70,12 +70,17 @@ and open the template in the editor.
                             <h:outputText value="Action" />
 
                         </f:facet>
-                        <p:commandButton value="Consulter"/>
+                        <c:if test="#{!empty sessionScope.username}" >
+                        <p:commandButton value="Réserver" disabled="#{!doc.checkDispo()}" action="#{doc.reserver()}"/>
+                        </c:if>
                     </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Disponible"/>
                         </f:facet>
+                        <p:graphicImage value="../img/check.png" width="40" height="40" rendered="#{doc.checkDispo()}"/>
+                        <p:graphicImage value="../img/256.png" width="40" height="40" rendered="#{!doc.checkDispo()}"/>
                     </h:column>
                 </b:dataTable>
             </p:panel>
