@@ -5,24 +5,14 @@
  */
 package com.lib.ManagedBeans;
 
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 
 /**
  *
  * @author hidro
  */
-@ManagedBean
-@Named(value = "nbrex")
-@Dependent
-public class Nbrex {
-    private int nb;
-    /**
-     * Creates a new instance of bnr
-     */
-    public Nbrex() {
-    }
+public class Nbrex implements Serializable{
+private int nb;
 
     public int getNb() {
         return nb;
@@ -30,6 +20,12 @@ public class Nbrex {
 
     public void setNb(int nb) {
         this.nb = nb;
+    }
+
+    /**
+     * Creates a new instance of Nbrex
+     */
+    public Nbrex() {
     }
     
 }

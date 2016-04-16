@@ -39,6 +39,11 @@ private ArrayList<Res> res ;
         res = ReservationCRUD.getRes();
     } 
     public void retour(Res res){
+                java.util.Date dt = new java.util.Date();
+
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+String currentTime = sdf.format(dt);
         try{
         Connection con = DataConnect.getConnection();
             String q = "UPDATE Exemplaire SET etat = 'dispo' WHERE id_exemp = " + res.getIdex() ;
@@ -46,7 +51,8 @@ private ArrayList<Res> res ;
             Statement commande = con.createStatement();
             System.out.println("sss");
             commande.executeUpdate(q);
-            q = "UPDATE Reserver SET date_retour ="+new Date().toString()+" WHERE id_exemp = " + res.getIdex()+" and id_utilisateur ="+ res.getIdut() ;
+            q = "UPDATE Reserver SET date_retour ='"+currentTime+"' WHERE id_exemp = " + res.getIdex()+" and id_utilisateur ="+ res.getIdut() ;
+            System.out.println(q);
             commande.executeUpdate(q);
             System.out.println("lllolll");
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"user is now valid","success"));
@@ -57,6 +63,11 @@ private ArrayList<Res> res ;
           }
     }
     public void perdu(Res res){
+        java.util.Date dt = new java.util.Date();
+
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+String currentTime = sdf.format(dt);
         try{
         Connection con = DataConnect.getConnection();
             String q = "UPDATE Exemplaire SET etat = 'perdu' WHERE id_exemp = " + res.getIdex() ;
@@ -64,8 +75,9 @@ private ArrayList<Res> res ;
             Statement commande = con.createStatement();
             System.out.println("sss");
             commande.executeUpdate(q);
-                   q = "UPDATE Reserver SET date_retour ="+new Date().toString()+" WHERE id_exemp = " + res.getIdex()+" and id_utilisateur ="+ res.getIdut() ;
-            commande.executeUpdate(q);
+                   q = "UPDATE Reserver SET date_retour ='"+currentTime+"' WHERE id_exemp = " + res.getIdex()+" and id_utilisateur ="+ res.getIdut() ;
+            System.out.println(q);
+                   commande.executeUpdate(q);
                    System.out.println("lllolll");
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"user is now valid","success"));
 

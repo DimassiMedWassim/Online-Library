@@ -8,6 +8,7 @@ package com.lib.ManagedBeans;
 import com.lib.util.Aut;
 import com.lib.util.DataConnect;
 import com.lib.util.DocCRUD;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +30,7 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 @Named(value = "viewDocs")
 
-public class ViewDocs {
+public class ViewDocs implements Serializable{
     private List<Doc> docs;
     private List<Doc> catDocs;
 
@@ -74,13 +75,13 @@ public class ViewDocs {
     public String search(){
         return "search";
     }
-    public void ajouteExemp(Doc doc,Nbrex nbr){
+    public void addExemp(Doc doc,Nbrex nbr){
         com.mysql.jdbc.Connection con = DataConnect.getConnection();
         Statement commande;
         try {
             commande = con.createStatement();
 
-        String q = "insert into Auteur (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
+        String q = "insert into Exemplaire (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
             for(int i=0;i<nbr.getNb();i++){
 
                 commande.executeUpdate(q);}
@@ -107,7 +108,7 @@ public class ViewDocs {
     public void supp(Doc doc){
         try{
             com.mysql.jdbc.Connection con = DataConnect.getConnection();
-            String q = "delete from Auteur WHERE id_doceur = " + doc.getId() ;
+            String q = "delete from Livre WHERE id_livre = " + doc.getId() ;
             System.out.println(q);
             Statement commande = con.createStatement();
             
@@ -121,12 +122,12 @@ public class ViewDocs {
     public void add(Doc doc,Nbrex nbr){
         try{
         com.mysql.jdbc.Connection con = DataConnect.getConnection();
-            String q = "insert into Auteur (titre, id_auteur , id_cat, langage,date_sortie ) values ('"+doc.getTitre()+"','"+doc.getAuteur()+"','"+doc.getId_cat()+"','"+doc.getLangage()+"','"+doc.getDateSortie()+"')" ;
+            String q = "insert into Livre (titre, id_auteur , id_cat, langage,date_sortie ) values ('"+doc.getTitre()+"','"+doc.getAuteur()+"','"+doc.getId_cat()+"','"+doc.getLangage()+"','"+doc.getDateSortie()+"')" ;
             System.out.println(q);
             Statement commande = con.createStatement();
             
             commande.executeUpdate(q);
-            q = "insert into Auteur (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
+            q = "insert into Exemplaire (id_livre,etat) values ('"+doc.getId()+"','dispo')" ;
             for(int i=0;i<nbr.getNb();i++){
                 commande.executeUpdate(q);
             }
