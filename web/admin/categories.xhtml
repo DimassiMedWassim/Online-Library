@@ -19,19 +19,54 @@ and open the template in the editor.
         <b:container>
 <ui:include src="menu.xhtml" />
 
-                         <h:form>
+                         <h:form id="form">
            
  
-                     <p:dataTable id="table" var="obj" value="#{catView.cat}" >
+                     <p:dataTable id="table" var="obj" value="#{catView.cat}" editable="true" >
                 <p:growl id="growl" life="2000" />
+                 <f:facet name="header" >
+             
+               <p:commandButton value="ADD" type="button" onclick="PF('dlgadd').show();" />
+        </f:facet>  
+                      <p:ajax event="rowEdit" listener="#{catView.modif(obj)}" update="growl" />
+       <p:ajax event="rowEditCancel"  update="growl" />
+ 
                 <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.id}" />
         </p:column>
                 <p:column filterBy="#{obj.nom}" headerText="nom" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.nom}" />
-</p:column>
-          
-  </p:dataTable>
+                      <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.nom}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{obj.nom}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+            
+               
+                       <p:column style="width:45px">
+           <p:rowEditor />
+                    </p:column>
+                <p:column style="width:80px; text-align: center">
+             
+                    <p:commandButton  update="table" value="X">
+                    <p:ajax  listener="#{catView.supp(obj)}"/></p:commandButton>
+                    
+
+                </p:column>
+                
+                                
+
+  </p:dataTable>              
+          <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="username" value="Nom:" />
+            <p:inputText id="username" value="#{cat.nom}" required="true" label="Nom" />
+     
+            <f:facet name="footer">
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{catView.add(cat)}"  />
+            </f:facet>  
+        </h:panelGrid>
+    </p:dialog>
+
 </h:form> 
         </b:container>
     </h:body>

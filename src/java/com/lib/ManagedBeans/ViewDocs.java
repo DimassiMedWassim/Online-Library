@@ -5,13 +5,18 @@
  */
 package com.lib.ManagedBeans;
 
+import com.lib.util.Aut;
+import com.lib.util.DataConnect;
 import com.lib.util.DocCRUD;
 import java.sql.Connection;
+import java.sql.Statement;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -66,6 +71,47 @@ public class ViewDocs {
     public String search(){
         return "search";
     }
-    
+    public void modif(Aut aut){
+        try{
+        com.mysql.jdbc.Connection con = DataConnect.getConnection();
+            String q = "UPDATE Auteur SET  nom_auteur = '"+aut.getNom()+"', pays = '"+aut.getPays()+"', date_nais = '"+aut.getDatenais()+"' WHERE id_auteur = " + aut.getId() ;
+            System.out.println(q);
+            Statement commande = con.createStatement();
+            
+            commande.executeUpdate(q);
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"supprime","success"));
+          }
+          catch(Exception e){
+              System.out.println("nooo");
+          }
+    }
+    public void supp(Aut aut){
+        try{
+            com.mysql.jdbc.Connection con = DataConnect.getConnection();
+            String q = "delete from Auteur WHERE id_auteur = " + aut.getId() ;
+            System.out.println(q);
+            Statement commande = con.createStatement();
+            
+            commande.executeUpdate(q);
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"supprime","success"));
+          }
+          catch(Exception e){
+              System.out.println("nooo");
+          }
+    }
+    public void add(Aut aut){
+        try{
+        com.mysql.jdbc.Connection con = DataConnect.getConnection();
+            String q = "insert into Auteur (nom_auteur, pays , date_nais ) values ('"+aut.getNom()+"','"+aut.getPays()+"','"+aut.getDatenais()+"')" ;
+            System.out.println(q);
+            Statement commande = con.createStatement();
+            
+            commande.executeUpdate(q);
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"supprime","success"));
+          }
+          catch(Exception e){
+              System.out.println("nooo");
+          }
+    }
     
 }

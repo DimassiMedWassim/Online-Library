@@ -26,33 +26,43 @@ and open the template in the editor.
                      <p:dataTable id="table" var="obj" value="#{autView.aut}" editable="true" >
                 <p:growl id="growl" life="2000" />
                  <f:facet name="header" >
-                     <p:ajax event="rowEdit" listener="#{autView.modif(obj)}" update="growl" />
-       <p:ajax event="rowEditCancel"  update="growl" />
- 
+             
                <p:commandButton value="ADD" type="button" onclick="PF('dlgadd').show();" />
         </f:facet>  
-              
+                      <p:ajax event="rowEdit" listener="#{autView.modif(obj)}" update="growl" />
+       <p:ajax event="rowEditCancel"  update="growl" />
+ 
                 <p:column filterBy="#{obj.id}" headerText="id" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.id}" />
         </p:column>
                 <p:column filterBy="#{obj.nom}" headerText="nom" footerText="" filterMatchMode="contains">
                       <p:cellEditor>
                <f:facet name="output"><h:outputText value="#{obj.nom}" /></f:facet>
-               <f:facet name="input"><p:inputText id="modelInput" value="#{obj.nom}" style="width:100%"/></f:facet>
+               <f:facet name="input"><p:inputText value="#{obj.nom}" style="width:100%"/></f:facet>
            </p:cellEditor>
         </p:column>
+            
                 <p:column filterBy="#{obj.datenais}" headerText="date nais" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.datenais}" />
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{obj.datenais}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.datenais}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
+                
                 <p:column filterBy="#{obj.pays}" headerText="pays" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.pays}" />
+                    <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{obj.pays}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{obj.pays}" style="width:100%"/></f:facet>
+           </p:cellEditor>
         </p:column>
-                       <p:column style="width:32px">
+                       <p:column style="width:45px">
            <p:rowEditor />
-       </p:column>
+                    </p:column>
                 <p:column style="width:80px; text-align: center">
              
-                    <p:commandButton  update="table" value="X"  actionListener="#{autView.supp(obj)}" />
+                    <p:commandButton  update="table" value="X">
+                    <p:ajax  listener="#{autView.supp(obj)}"/></p:commandButton>
+                    
 
                 </p:column>
                 

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author wassim
  */
 @ManagedBean
-@Named(value = "aut")
+@Named(value = "signIn")
 
 public class SignIn {
     private String nom;

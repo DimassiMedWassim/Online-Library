@@ -13,7 +13,7 @@ import javax.inject.Named;
  * @author hidro
  */
 @ManagedBean
-@Named(value = "signIn")
+@Named(value = "aut")
 
 public class Aut {
     private String id,nom,pays,datenais;
