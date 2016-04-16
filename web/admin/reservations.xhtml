@@ -32,12 +32,16 @@ and open the template in the editor.
         </p:column>
                 <p:column filterBy="#{obj.dateres}" headerText="date reservation" footerText="" filterMatchMode="contains">
                     <h:outputText value="#{obj.dateres}" />
+   
         </p:column>
-                <p:column filterBy="#{obj.dateprev}" headerText="date prevu de retour" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.dateprev}" />
+                <p:column style="width:100px">
+                        <p:commandButton  update="table" value="retour livre">
+                              <p:ajax  listener="#{resView.retour(obj)}"/></p:commandButton>
         </p:column>
-                <p:column filterBy="#{obj.dateretour}" headerText="date de retour" footerText="" filterMatchMode="contains">
-                    <h:outputText value="#{obj.dateretour}" />
+        
+                <p:column style="width:100px">
+                        <p:commandButton  update="table" value="livre perdu">
+                            <p:ajax  listener="#{resView.perdu(obj)}"/></p:commandButton>
         </p:column>
   
   </p:dataTable>

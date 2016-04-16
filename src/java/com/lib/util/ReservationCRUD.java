@@ -21,7 +21,7 @@ public class ReservationCRUD {
         ArrayList<Res> users = new ArrayList<Res>();
         try {
             Connection con = DataConnect.getConnection();
-            String q = "select * from Reserver";
+            String q = "select * from Reserver where date_retour is NULL";
             Statement commande = con.createStatement();
             ResultSet rs = commande.executeQuery(q);
             while(rs.next()){

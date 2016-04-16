@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 
 
@@ -23,10 +24,12 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-
+@Named(value ="doc")
 public class Doc {
 
     private String id;
+    private String id_au;
+    private String id_cat;
     private String titre;
     private String auteur;
     private String categorie;
@@ -35,6 +38,22 @@ public class Doc {
     private String langage;
     private String description;
     private boolean dispo;
+
+    public String getId_au() {
+        return id_au;
+    }
+
+    public void setId_au(String id_au) {
+        this.id_au = id_au;
+    }
+
+    public String getId_cat() {
+        return id_cat;
+    }
+
+    public void setId_cat(String id_cat) {
+        this.id_cat = id_cat;
+    }
     
     
     /**

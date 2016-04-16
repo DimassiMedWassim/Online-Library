@@ -42,6 +42,8 @@ public class DocCRUD {
                 
                 doc.setId(rs.getString(1));
                 doc.setTitre(rs.getString(2));
+                doc.setId_au(rs.getString(3));
+                doc.setId_cat(rs.getString(4));
                 doc.setAuteur(this.getAuteur(rs.getString(3)));
                 doc.setCategorie(this.getCategorie(rs.getString(4)));
                 doc.setLangage(rs.getString(5));

@@ -5,10 +5,15 @@
  */
 package com.lib.util;
 
+import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
+
 /**
  *
  * @author hidro
  */
+@ManagedBean
+@Named(value = "res")
 public class Res {
     private String idex,idut,dateres,dateprev,dateretour;
 

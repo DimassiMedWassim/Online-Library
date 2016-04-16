@@ -71,17 +71,32 @@ and open the template in the editor.
   </p:dataTable>              
           <p:dialog header="ADD" widgetVar="dlgadd" resizable="false">
         <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="username" value="Nom:" />
-            <p:inputText id="username" value="#{aut.nom}" required="true" label="Nom" />
+            <h:form>
+              <p:panel header="Validate">
+                <p:messages autoUpdate="true"/>
+            <h:outputLabel for="titre" value="Titre:" />
+            <p:inputText id="titre" value="#{doc.titre}" required="true" />
  
-            <h:outputLabel for="password" value="pays:" />
-            <p:inputText id="password" value="#{aut.pays}" required="true" label="pays" />
-            <h:outputLabel for="date" value="date naissance:" />
-            <p:inputText id="date" value="#{aut.datenais}" placeholder="yyyy/MM/dd" required="true" label="date naissance" />
-               
+            <h:outputLabel for="langague" value="langague:" />
+            <p:inputText id="langague" value="#{doc.langage}" required="true"  />
+            <h:outputLabel for="date" value="date de sortie:" />
+            <p:inputText id="date" value="#{doc.dateSortie}" placeholder="yyyy/MM/dd" required="true" label="date naissance" />
+            <h:outputLabel for="aut" value="auteur:" />
+            <p:inputText id="aut" value="#{doc.id_au}"  required="true" label="date naissance" >
+            <f:validateDoubleRange minimum="0" />
+            </p:inputText>
+            <p:message for="aut" />
+            <h:outputLabel for="cat" value="cataloge:" />
+            <p:inputText id="cat" value="#{doc.id_cat}"  required="true" label="date naissance" />
+             <f:validateDoubleRange minimum="0"  />
+            </p:inputText>
+            <p:message for="aut" />    
+
             <f:facet name="footer">
-                <p:commandButton update = ":form:table" value="add"  actionListener="#{autView.add(aut)}"  />
-            </f:facet>  
+                <p:commandButton update = ":form:table" value="add"  actionListener="#{viewDocs.add(aut,nbrex)}"  />
+            </f:facet> 
+            </p:panel>
+</h:form>
         </h:panelGrid>
     </p:dialog>
 
