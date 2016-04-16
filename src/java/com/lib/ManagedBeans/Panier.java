@@ -34,6 +34,7 @@ public class Panier {
             addMessage("Ce document existe déjà dans le panier");
         }else{
             docs.add(doc);
+            addMessage("Document ajouté !!");
         }
         
     }

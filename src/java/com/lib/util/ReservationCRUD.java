@@ -30,8 +30,8 @@ public class ReservationCRUD {
                 user.setIdex(rs.getString(1));
                 user.setIdut(rs.getString(2));
                 user.setDateres(rs.getString(3));
-                user.setDateprev(rs.getString(4));
-                user.setDateretour(rs.getString(5));
+               
+                user.setDateretour(rs.getString(4));
 
                 users.add(user);
             }

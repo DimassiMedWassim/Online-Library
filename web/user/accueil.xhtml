@@ -63,7 +63,7 @@ and open the template in the editor.
                             </p:submenu>
                             <p:submenu label="Connexion">
 
-                                <p:menuitem value="Déconnexion" ajax="false"  action="#{loginUser.logout}" />
+                                <p:menuitem value="Déconnexion" ajax="false" disabled="#{empty sessionScope.username}" action="#{loginUser.logout}" />
 
                             </p:submenu>
                         </p:menu>
