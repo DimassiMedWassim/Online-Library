@@ -51,11 +51,15 @@ public class LoginUser {
 
     public String login() {
         boolean valid = LoginVal.validate(username, password, "Utilisateur");
+        
         if (valid) {
             HttpSession session = SessionBean.getSession();
             System.out.println(username);
             System.out.println(password);
+            
+            User user = UserCRUD.getUserInfo(username);
             session.setAttribute("username", username);
+            session.setAttribute("userID",user.getId());
             return "user";
         } else {
             FacesContext.getCurrentInstance().addMessage(

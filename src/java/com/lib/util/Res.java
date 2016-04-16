@@ -15,7 +15,7 @@ import javax.inject.Named;
 @ManagedBean
 @Named(value = "res")
 public class Res {
-    private String idex,idut,dateres,dateprev,dateretour;
+    private String idex,idut,dateres,dateretour;
 
     public String getIdex() {
         return idex;
@@ -41,13 +41,7 @@ public class Res {
         this.dateres = dateres;
     }
 
-    public String getDateprev() {
-        return dateprev;
-    }
-
-    public void setDateprev(String dateprev) {
-        this.dateprev = dateprev;
-    }
+   
 
     public String getDateretour() {
         return dateretour;
